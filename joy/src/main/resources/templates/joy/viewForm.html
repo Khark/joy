@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/joy/writeForm}" th:object="${JoyEntity}" method="post">
+
+            <input type="text" th:field="*{name}" placeholder="책 제목을 입력하세요">
+           	<input type="text" th:field="*{memo}" placeholder="책 제목을 입력하세요">
+
+ <table border=1>
+ 
+ 	
+    <!-- <tr>
+        <td>책제목</td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>저자명</td>
+        <td>
+            <input type="text" th:field="*{creator}" placeholder="저자명을 입력하세요">
+        </td>
+    </tr>
+    <tr>
+        <td>출판사</td>
+        <td>
+            <input type="text" id="publisher" name="publisher"  placeholder="출판사명을 입력하세요">
+        </td>
+    </tr>
+    <tr>
+        <td>출판연도</td>
+        <td>
+            <input type="text" th:field="*{publishedYear}" value="">
+        </td>
+    </tr> -->
+    </table>
+    <button type="submit" >입력</button>
+
+
+</form>
+</body>
+</html>

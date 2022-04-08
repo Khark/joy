@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+    
+ var modify = [[ @{/layout/board/modify} ]];
+  $("#modify").on("click", function(){
+   	$("#frm").attr("action", modify);
+  });
+  var del = /*[[ @{/layout/board/delete} ]]*/;
+  $("#delete").on("click", function(){
+    $("#frm").attr("action", del);
+  });
+    
+    /*]]>*/
+</script>
+
+<body>
+<form th:action="@{/lagav/lagavWriteForm}" th:object="${LagavTO}" method="post">
+
+   생산년도 <input type="text" th:field="*{createyear}"/><br/>
+   지역<input type="text" th:field="*{location}"/><br/>
+   라벨<input type="text" th:field="*{label}" /><br/>
+   생산개수	<input type="text" th:field="*{order} "/> 
+       <!-- <button type="submit" >입력</button>
+   	  	 -->
+   	  	 
+     <input type="submit" id="input" value="입력"/>
+     <input type="submit" id="remove" value="삭제"/>
+</form>
+</body>
+</html>
