@@ -30,7 +30,6 @@ public class MemberSvcImpl implements MemberSvc {
 		// TODO Auto-generated method stub
 
 		//
-
 		// asdfasdfa
 		//
 		return memberRepository.findById(memberno)
@@ -139,6 +138,16 @@ public class MemberSvcImpl implements MemberSvc {
 			
 			}
 //2190881664
+			//String cratedate = element.getAsJsonObject().get("connect_at").getAsString();
+			memberEntity memberto = new memberEntity();
+			memberto.setMemberid(Integer.toString(id));
+			//memberto.setCreatedate(cratedate);
+			//memberto.setLastlogindate(cratedate);
+			
+		//	memberRepository.findById(memberto);
+			Long longid = new Long(id);
+			 memberRepository.findById(longid);
+			memberRepository.save(memberto );
 			System.out.println("id : " + id);
 			System.out.println("email : " + email);
 			
