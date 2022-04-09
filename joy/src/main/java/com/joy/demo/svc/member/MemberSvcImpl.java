@@ -146,10 +146,16 @@ public class MemberSvcImpl implements MemberSvc {
 			
 		//	memberRepository.findById(memberto);
 			Long longid = new Long(id);
-			 memberRepository.findById(longid);
-			memberRepository.save(memberto );
-			System.out.println("id : " + id);
-			System.out.println("email : " + email);
+			if(!memberRepository.findById(longid).isPresent()) {
+				// 
+				memberRepository.save(memberto );
+				System.out.println("id : " + id);
+				System.out.println("email : " + email);
+				
+			}else {
+				// 로그인 기록 저장 시켜주기.....
+				
+			}
 			
 			
 			result = "ProcessSucess";
