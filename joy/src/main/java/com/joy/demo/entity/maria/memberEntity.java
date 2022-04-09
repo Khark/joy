@@ -24,4 +24,9 @@ public class memberEntity implements Serializable  {
 	@Column(length = 20)
 	private String memberid;
 
+	private String email;
+	
+	private String createdate;
+	
+	private String lastlogindate;
 }

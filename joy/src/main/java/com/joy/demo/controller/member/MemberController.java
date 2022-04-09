@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.joy.demo.entity.maria.tokenEntity;
 import com.joy.demo.svc.member.MemberSvc;
 
 @Controller
@@ -63,10 +64,17 @@ public class MemberController {
 		return "redirect:"+uri;
 	}
 	@GetMapping("kakao_login")
-	public String getKakaoAccessToken(@RequestParam String token) {
+	public String getKakaoAccessToken(@RequestParam String code) {
+		tokenEntity tokento = membersvc.OAuthgetKakaoAccessToken(code);
 		
+		if(tokento != null && tokento.getAccess_code() == 200) {
+			membersvc.createUser(tokento);
+			
+			
+		}else {
+			
+		}
 		
-		membersvc.OAuthgetKakaoAccessToken(token);
-		return "";
+		return "member/kakao_login";
 	}
 }
