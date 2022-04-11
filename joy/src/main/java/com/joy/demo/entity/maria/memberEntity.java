@@ -25,17 +25,20 @@ import lombok.Setter;
 
 public class memberEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	private Long memberid;
+	
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, // 사용할 전략을 시퀀스로 선택
 			generator = "MEMBER_SEQ_GEN" // 식별자 생성기를 설정해놓은 USER_SEQ_GEN으로 설정
 	)
 	private Long memberno;
-
-	@Id
-	private String memberid;
 
 	private String email;
 
 	private String createdate;
 
 	private String lastlogindate;
+	
+	private String result;
 }

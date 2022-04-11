@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -98,8 +99,9 @@ public class MemberSvcImpl implements MemberSvc {
 
 	@Override
 	@Transactional
-	public String createUser(tokenEntity to) {
+	public memberEntity createUser(tokenEntity to) {
 		// TODO Auto-generated method stub
+		memberEntity vo = new memberEntity();
 		String result ="";
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -139,23 +141,61 @@ public class MemberSvcImpl implements MemberSvc {
 			}
 //2190881664
 			//String cratedate = element.getAsJsonObject().get("connect_at").getAsString();
+			Long longid = new Long(id);
+
 			memberEntity memberto = new memberEntity();
-			memberto.setMemberid(Integer.toString(id));
+			memberto.setMemberid(longid);
 			//memberto.setCreatedate(cratedate);
 			//memberto.setLastlogindate(cratedate);
 			
 		//	memberRepository.findById(memberto);
-			Long longid = new Long(id);
-			if(!memberRepository.findById(longid).isPresent()) {
-				// 
-				memberRepository.save(memberto );
-				System.out.println("id : " + id);
-				System.out.println("email : " + email);
-				
+			
+			System.out.println("##loginid?"+longid);
+			Optional<memberEntity> opto = memberRepository.findById(longid);
+			System.out.println("##1111?"+longid);
+
+			if(opto.isPresent()) {
+				result ="present";
 			}else {
-				// 로그인 기록 저장 시켜주기.....
 				
+				memberRepository.save(memberto );
+				result ="new";
 			}
+			
+//			memberEntity memberEntity = memberRepository.findById(longid).isPresent().get();
+//			
+//			System.out.println("##memberno?"+memberEntity.getMemberno());
+//			
+//			if(memberEntity == null || memberEntity.getMemberid() == null ) {
+//				if(!email.equals("")) {
+//					memberto.setEmail(email);
+//				}
+//				memberRepository.save(memberto );
+//			}
+			
+//			if(opto.isEmpty()) {
+//				memberRepository.save(memberto);
+//			}else {
+//					opto.ifPresent(u -> {
+//					memberto.setCreatedate(u.getCreatedate());
+//				});
+//					
+//					System.out.println("##"+memberto.getCreatedate());
+//			}
+			
+			
+		//	memberRepository.findById(longid).orElseThrow(() -> memberRepository.save(memberto) ) ;
+
+			//			if(!memberRepository.findById(longid).isPresent()) {
+//				// 
+//				memberRepository.save(memberto );
+//				System.out.println("id : " + id);
+//				System.out.println("email : " + email);
+//				
+//			}else {
+//				// 로그인 기록 저장 시켜주기.....
+//				
+//			}
 			
 			
 			result = "ProcessSucess";
@@ -164,6 +204,6 @@ public class MemberSvcImpl implements MemberSvc {
 			result = "ProcessFail";
 			e.printStackTrace();
 		}
-		return result;
+		return vo;
 	}
 }

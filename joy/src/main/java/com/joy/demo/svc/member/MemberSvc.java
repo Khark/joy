@@ -6,7 +6,7 @@ import com.joy.demo.entity.maria.tokenEntity;
 public interface MemberSvc {
 	public memberEntity selectMember(Long memberno);
 	public tokenEntity OAuthgetKakaoAccessToken(String token);
-	public String createUser(tokenEntity tokenTo);
+	public memberEntity createUser(tokenEntity tokenTo);
 	
 	
 }
