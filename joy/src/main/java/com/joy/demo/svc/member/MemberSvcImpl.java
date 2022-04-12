@@ -153,15 +153,20 @@ public class MemberSvcImpl implements MemberSvc {
 			System.out.println("##loginid?"+longid);
 			Optional<memberEntity> opto = memberRepository.findById(longid);
 			System.out.println("##1111?"+longid);
-
+			
 			if(opto.isPresent()) {
-				result ="present";
+				vo = opto.get();
+				if(vo.getNickname() == null || vo.getNickname().equals("") ) {
+					result ="new";
+				}else {
+					result ="present";
+				}
 			}else {
-				
 				memberRepository.save(memberto );
 				result ="new";
 			}
 			
+			vo.setMemberid(opto.get().getMemberid()); 
 //			memberEntity memberEntity = memberRepository.findById(longid).isPresent().get();
 //			
 //			System.out.println("##memberno?"+memberEntity.getMemberno());
@@ -198,7 +203,7 @@ public class MemberSvcImpl implements MemberSvc {
 //			}
 			
 			
-			result = "ProcessSucess";
+			vo.setResult(result);
 			br.close();
 		} catch (Exception e) {
 			result = "ProcessFail";

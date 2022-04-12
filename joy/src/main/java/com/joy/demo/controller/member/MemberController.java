@@ -1,5 +1,8 @@
 package com.joy.demo.controller.member;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.joy.demo.advice.SessionConstants;
 import com.joy.demo.entity.maria.memberEntity;
 import com.joy.demo.entity.maria.tokenEntity;
 import com.joy.demo.svc.member.MemberSvc;
@@ -65,23 +69,29 @@ public class MemberController {
 		return "redirect:"+uri;
 	}
 	@GetMapping("kakao_login")
-	public String getKakaoAccessToken(@RequestParam String code) {
+	public String getKakaoAccessToken(@RequestParam String code, Model model, HttpServletRequest request){
 		tokenEntity tokento = membersvc.OAuthgetKakaoAccessToken(code);
 		String result = "";
-		
 		memberEntity to = new memberEntity();
 		if(tokento != null && tokento.getAccess_code() == 200) {
 			to = membersvc.createUser(tokento);
-			
+			System.out.println("##memberid?"+to.getMemberid());
 			
 		}else {
 			result ="fail";
-		}
+			return "member/memberjoin";
 		
-		if(to.getResult().equals("")) {
-			return "member/kakao_loginForm";
+		}
+		System.out.println("##result?"+to.getResult()+"##?"+to.getMemberid());
+		
+		HttpSession session = request.getSession();                         // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성하여 반환
+	    session.setAttribute(SessionConstants.LOGIN_MEMBER, to);   
+		model.addAttribute("to", to);
+		if(to.getResult().equals("new") || to.getResult().equals("new2") ) {
+			
+			return "member/writeForm";
 
-		}else if(to.getResult().equals("")) {
+		}else if(to.getResult().equals("present")) {
 			return "joy/list_Form";
 
 		}else {

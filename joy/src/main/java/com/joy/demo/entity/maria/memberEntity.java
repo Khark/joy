@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Entity(name="membertable")
 @Table(name = "membertable")
 @Getter
 @Setter
@@ -41,4 +41,8 @@ public class memberEntity implements Serializable {
 	private String lastlogindate;
 	
 	private String result;
+	
+	private String nickname;
+	
+	private String birth;
 }
