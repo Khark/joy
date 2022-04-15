@@ -83,7 +83,6 @@ public class MemberSvcImpl implements MemberSvc {
 			refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 			// System.out.println("##id : "+id);
 			System.out.println("access_token : " + access_Token);
-			System.out.println("refresh_token : " + refresh_Token);
 			tokenvo.setToken(access_Token);
 			br.close();
 			bw.close();
@@ -111,6 +110,8 @@ public class MemberSvcImpl implements MemberSvc {
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
 			String token = to.getToken();
+			System.out.println("access_token : " + token);
+
 			conn.setRequestProperty("Authorization", "Bearer " + token);
 
 			int resCode = conn.getResponseCode();

@@ -72,13 +72,13 @@ public class MemberController {
 	@GetMapping("kakao_login")
 	public String getKakaoAccessToken(@RequestParam String code, Model model, HttpServletRequest request){
 		tokenEntity tokento = membersvc.OAuthgetKakaoAccessToken(code);
+		tokenEntity tokento2 = new tokenEntity();
 		String result = "";
 		memberEntity to = new memberEntity();
 		
 		
 		if(tokento != null && tokento.getAccess_code() == 200) {
-			tokento = new tokenEntity();
-			tokento = membersvc.accessUser(tokento);
+			tokento2 = membersvc.accessUser(tokento);
 		}else {
 			//result ="fail";
 			return "joy/main";
@@ -87,7 +87,7 @@ public class MemberController {
 		
 		if(tokento != null && tokento.getAccess_code() != null) {
 			
-			to = membersvc.CR_User(tokento);
+			to = membersvc.CR_User(tokento2);
 			
 			
 		}else {
