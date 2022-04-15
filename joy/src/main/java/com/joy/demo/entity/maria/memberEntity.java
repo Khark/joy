@@ -45,4 +45,8 @@ public class memberEntity implements Serializable {
 	private String nickname;
 	
 	private String birth;
+	
+	private String membertype;
+	
+	private String memberlevel;
 }

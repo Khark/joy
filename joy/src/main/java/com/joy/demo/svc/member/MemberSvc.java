@@ -1,12 +1,18 @@
 package com.joy.demo.svc.member;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpSession;
+
 import com.joy.demo.entity.maria.memberEntity;
 import com.joy.demo.entity.maria.tokenEntity;
 
 public interface MemberSvc {
 	public memberEntity selectMember(Long memberno);
 	public tokenEntity OAuthgetKakaoAccessToken(String token);
-	public memberEntity createUser(tokenEntity tokenTo);
+	public tokenEntity accessUser(tokenEntity tokenTo);
 	
+	public String memberLogout(HttpSession session) throws IOException;
+	public memberEntity CR_User(tokenEntity to);
 	
 }

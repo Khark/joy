@@ -1,11 +1,12 @@
 package com.joy.demo.advice;
 
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//
+//@EnableWebSecurity
 
-@EnableWebSecurity
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig  {
 
-	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -73,22 +74,32 @@ public class MemberController {
 		tokenEntity tokento = membersvc.OAuthgetKakaoAccessToken(code);
 		String result = "";
 		memberEntity to = new memberEntity();
+		
+		
 		if(tokento != null && tokento.getAccess_code() == 200) {
-			to = membersvc.createUser(tokento);
-			System.out.println("##memberid?"+to.getMemberid());
+			tokento = new tokenEntity();
+			tokento = membersvc.accessUser(tokento);
+		}else {
+			//result ="fail";
+			return "joy/main";
+		}
+		
+		
+		if(tokento != null && tokento.getAccess_code() != null) {
+			
+			to = membersvc.CR_User(tokento);
+			
 			
 		}else {
-			result ="fail";
-			return "member/memberjoin";
-		
+			return "joy/main";
 		}
-		System.out.println("##result?"+to.getResult()+"##?"+to.getMemberid());
 		
-		HttpSession session = request.getSession();                         // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성하여 반환
-	    session.setAttribute(SessionConstants.LOGIN_MEMBER, to);   
-		model.addAttribute("to", to);
 		if(to.getResult().equals("new") || to.getResult().equals("new2") ) {
+			HttpSession session = request.getSession();                         // 세R션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성하여 반환
+		   // session.setAttribute(SessionConstants.LOGIN_MEMBER, to);   
 			
+			session.setAttribute("access_token", tokento.getToken() );
+		    model.addAttribute("to", to);
 			return "member/writeForm";
 
 		}else if(to.getResult().equals("present")) {
@@ -100,4 +111,14 @@ public class MemberController {
 		}
 		
 	}
+	
+	@PostMapping("logout")
+	public String logout(HttpSession session ){
+		
+		
+		
+		return "joy/main";
+	}
+	
+	
 }

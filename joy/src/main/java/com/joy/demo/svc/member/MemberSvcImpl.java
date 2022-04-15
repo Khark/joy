@@ -2,11 +2,14 @@ package com.joy.demo.svc.member;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,8 +46,6 @@ public class MemberSvcImpl implements MemberSvc {
 		tokenEntity tokenvo = new tokenEntity();
 		String access_Token = "";
 		String refresh_Token = "";
-		String element_Token = "";
-		String element_Token2 = "";
 
 		String reqURL = "https://kauth.kakao.com/oauth/token";
 		try {
@@ -98,10 +99,9 @@ public class MemberSvcImpl implements MemberSvc {
 	}
 
 	@Override
-	@Transactional
-	public memberEntity createUser(tokenEntity to) {
+	public tokenEntity accessUser(tokenEntity to) {
 		// TODO Auto-generated method stub
-		memberEntity vo = new memberEntity();
+		tokenEntity vo = new tokenEntity();
 		String result ="";
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -127,88 +127,79 @@ public class MemberSvcImpl implements MemberSvc {
 			// Gson 라이브러리로 JSON파싱
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
+			vo.setToken(token);
+			vo.setElement(element);
+			
+			//Long longid = new Long(id);
 
-			int id = element.getAsJsonObject().get("id").getAsInt();
-			boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
-			String email = "";
-			if (hasEmail) {
-				//response body : {"id":2190881664,"connected_at":"2022-04-06T12:26:59Z","kakao_account":{"has_email":true,"email_needs_agreement":true}}
-				//response body : {"id":2194031761,"connected_at":"2022-04-09T01:48:56Z","kakao_account":{"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"gw_p6rk@daum.net"}}
-				if(result.contains("\"email\"") ) {
-					email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
-				}
+			//memberEntity memberto = new memberEntity();
+			//memberto.setMemberid(longid);
 			
-			}
-//2190881664
-			//String cratedate = element.getAsJsonObject().get("connect_at").getAsString();
-			Long longid = new Long(id);
-
-			memberEntity memberto = new memberEntity();
-			memberto.setMemberid(longid);
-			//memberto.setCreatedate(cratedate);
-			//memberto.setLastlogindate(cratedate);
 			
-		//	memberRepository.findById(memberto);
 			
-			System.out.println("##loginid?"+longid);
-			Optional<memberEntity> opto = memberRepository.findById(longid);
-			System.out.println("##1111?"+longid);
-			
-			if(opto.isPresent()) {
-				vo = opto.get();
-				if(vo.getNickname() == null || vo.getNickname().equals("") ) {
-					result ="new";
-				}else {
-					result ="present";
-				}
-			}else {
-				memberRepository.save(memberto );
-				result ="new";
-			}
-			
-			vo.setMemberid(opto.get().getMemberid()); 
-//			memberEntity memberEntity = memberRepository.findById(longid).isPresent().get();
+//			System.out.println("##loginid?"+longid);
+//			Optional<memberEntity> opto = memberRepository.findById(longid);
+//			System.out.println("##1111?"+longid);
 //			
-//			System.out.println("##memberno?"+memberEntity.getMemberno());
-//			
-//			if(memberEntity == null || memberEntity.getMemberid() == null ) {
-//				if(!email.equals("")) {
-//					memberto.setEmail(email);
+//			if(opto.isPresent()) {
+//				vo = opto.get();
+//				if(vo.getNickname() == null || vo.getNickname().equals("") ) {
+//					result ="new";
+//				}else {
+//					result ="present";
 //				}
-//				memberRepository.save(memberto );
-//			}
-			
-//			if(opto.isEmpty()) {
-//				memberRepository.save(memberto);
 //			}else {
-//					opto.ifPresent(u -> {
-//					memberto.setCreatedate(u.getCreatedate());
-//				});
-//					
-//					System.out.println("##"+memberto.getCreatedate());
-//			}
-			
-			
-		//	memberRepository.findById(longid).orElseThrow(() -> memberRepository.save(memberto) ) ;
-
-			//			if(!memberRepository.findById(longid).isPresent()) {
-//				// 
+//				memberto.setMemberlevel("1");
+//				memberto.setMembertype("kakao");
 //				memberRepository.save(memberto );
-//				System.out.println("id : " + id);
-//				System.out.println("email : " + email);
-//				
-//			}else {
-//				// 로그인 기록 저장 시켜주기.....
-//				
+//				result ="new";
 //			}
-			
-			
-			vo.setResult(result);
+//			
+//			vo.setMemberid(opto.get().getMemberid()); 
+//			vo.setResult(result);
 			br.close();
 		} catch (Exception e) {
 			result = "ProcessFail";
 			e.printStackTrace();
 		}
+		return vo;
+	}
+
+	@Override
+	public String memberLogout(HttpSession session) throws IOException {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public memberEntity CR_User(tokenEntity to) {
+		// TODO Auto-generated method stub
+		String result = "";
+		memberEntity vo = new memberEntity();
+		memberEntity memberto = new memberEntity();
+		try {
+		
+
+//			int id = element.getAsJsonObject().get("id").getAsInt();
+//			boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
+//			String email = "";
+//			if (hasEmail) {
+//				if(result.contains("\"email\"") ) {
+//					email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
+//				}
+//			
+//			}
+			
+			
+			
+			
+		}catch (Exception e) {
+			result = "ProcessFail";
+			e.printStackTrace();
+		}
+		vo.setResult(result);
 		return vo;
 	}
 }
