@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.joy.demo.advice.SessionConstants;
 import com.joy.demo.entity.maria.memberEntity;
 import com.joy.demo.entity.maria.tokenEntity;
+import com.joy.demo.entity.mongo.joyEntity;
 import com.joy.demo.svc.member.MemberSvc;
 
 @Controller
@@ -70,46 +73,47 @@ public class MemberController {
 		return "redirect:"+uri;
 	}
 	@GetMapping("kakao_login")
-	public String getKakaoAccessToken(@RequestParam String code, Model model, HttpServletRequest request){
+	public String getKakaoAccessToken(@RequestParam String code, @ModelAttribute("MemberTO") @Validated memberEntity memberto ,Model model, HttpServletRequest request){
 		tokenEntity tokento = membersvc.OAuthgetKakaoAccessToken(code);
 		tokenEntity tokento2 = new tokenEntity();
 		String result = "";
-		memberEntity to = new memberEntity();
 		
-		
+
 		if(tokento != null && tokento.getAccess_code() == 200) {
 			tokento2 = membersvc.accessUser(tokento);
 		}else {
-			//result ="fail";
 			return "joy/main";
 		}
+		HttpSession session = request.getSession();    
+
+		if(tokento != null && tokento.getAccess_code() != null && tokento2 != null) {
+			
+			if(tokento2.getResult().equals("new")) {
+				//session.setAttribute("access_token", tokento.getToken() );
+				session.setAttribute("memberid", tokento2.getMemberid());
+				return "member/writeForm";
+			}else {
+				memberEntity to = membersvc.readUser(tokento);
+				session.setAttribute("access_token", tokento.getToken() );
+				session.setAttribute("memberid", to.getMemberid());
+				session.setAttribute("memberlevel", to.getMemberlevel());
+				return "joy/list_Form";
+			}
+			
+		}
 		
-		
-		if(tokento != null && tokento.getAccess_code() != null) {
-			
-			to = membersvc.CR_User(tokento2);
-			
-			
-		}else {
+		else {
 			return "joy/main";
 		}
+	}
+	
+	@PostMapping("membersSave")
+	public String membersSave(@ModelAttribute("MemberTO") @Validated memberEntity memberto ,Model model, HttpServletRequest request) {
 		
-		if(to.getResult().equals("new") || to.getResult().equals("new2") ) {
-			HttpSession session = request.getSession();                         // 세R션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성하여 반환
-		   // session.setAttribute(SessionConstants.LOGIN_MEMBER, to);   
-			
-			session.setAttribute("access_token", tokento.getToken() );
-		    model.addAttribute("to", to);
-			return "member/writeForm";
-
-		}else if(to.getResult().equals("present")) {
-			return "joy/list_Form";
-
-		}else {
-			return "member/kakaoJoin";
-
-		}
+	System.out.println("##"+	memberto.getNickname());
 		
+		
+		return "joy/list_Form";
 	}
 	
 	@PostMapping("logout")

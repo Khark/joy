@@ -13,5 +13,6 @@ public class tokenEntity {
 	private String token;
 	private Integer access_code;
 	private JsonElement element;
-	
+	private String result;
+	private long memberid;
 }

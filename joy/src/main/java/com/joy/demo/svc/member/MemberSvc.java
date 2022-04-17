@@ -13,6 +13,6 @@ public interface MemberSvc {
 	public tokenEntity accessUser(tokenEntity tokenTo);
 	
 	public String memberLogout(HttpSession session) throws IOException;
-	public memberEntity CR_User(tokenEntity to);
-	
+	public memberEntity crateUser(tokenEntity to);
+	public memberEntity readUser(tokenEntity to);
 }

@@ -131,33 +131,17 @@ public class MemberSvcImpl implements MemberSvc {
 			vo.setToken(token);
 			vo.setElement(element);
 			
-			//Long longid = new Long(id);
-
-			//memberEntity memberto = new memberEntity();
-			//memberto.setMemberid(longid);
+			long id = element.getAsJsonObject().get("id").getAsLong();
+			vo.setMemberid(id);
+			Optional<memberEntity> opto = memberRepository.findById(id);
+			if(opto.isPresent()) {
+				System.out.println("##aa");
+				vo.setResult("old");
+			}else {
+				System.out.println("##bb");
+				vo.setResult("new");
+			}
 			
-			
-			
-//			System.out.println("##loginid?"+longid);
-//			Optional<memberEntity> opto = memberRepository.findById(longid);
-//			System.out.println("##1111?"+longid);
-//			
-//			if(opto.isPresent()) {
-//				vo = opto.get();
-//				if(vo.getNickname() == null || vo.getNickname().equals("") ) {
-//					result ="new";
-//				}else {
-//					result ="present";
-//				}
-//			}else {
-//				memberto.setMemberlevel("1");
-//				memberto.setMembertype("kakao");
-//				memberRepository.save(memberto );
-//				result ="new";
-//			}
-//			
-//			vo.setMemberid(opto.get().getMemberid()); 
-//			vo.setResult(result);
 			br.close();
 		} catch (Exception e) {
 			result = "ProcessFail";
@@ -175,25 +159,28 @@ public class MemberSvcImpl implements MemberSvc {
 
 	@Override
 	@Transactional
-	public memberEntity CR_User(tokenEntity to) {
+	public memberEntity crateUser(tokenEntity to) {
 		// TODO Auto-generated method stub
 		String result = "";
 		memberEntity vo = new memberEntity();
 		memberEntity memberto = new memberEntity();
 		try {
-		
-
-//			int id = element.getAsJsonObject().get("id").getAsInt();
-//			boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
-//			String email = "";
-//			if (hasEmail) {
-//				if(result.contains("\"email\"") ) {
-//					email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
-//				}
-//			
-//			}
+			JsonElement je =  to.getElement();
 			
+			long id = je.getAsJsonObject().get("id").getAsLong();
+			memberto.setMemberid(id);
 			
+			Optional<memberEntity> opto = memberRepository.findById(id);
+			
+			if(opto.isPresent()) {
+			
+				vo = opto.get();
+				vo.setResult("present");
+			}else {
+				
+				
+				memberRepository.save(memberto );
+			}
 			
 			
 		}catch (Exception e) {
@@ -202,5 +189,23 @@ public class MemberSvcImpl implements MemberSvc {
 		}
 		vo.setResult(result);
 		return vo;
+	}
+
+	@Override
+	public memberEntity readUser(tokenEntity to) {
+		// TODO Auto-generated method stub
+		//memberEntity vo = new memberEntity();
+		//JsonElement element = to.getElement();
+		long id = to.getMemberid();
+		
+//		Optional<memberEntity> opvo = memberRepository.findById(id);
+//		memberEntity vo = new memberEntity();
+//		if(opvo.isPresent()) {
+//			vo = opvo.get();
+//		}else {
+//			vo.setResult("");
+//		}
+		return memberRepository.findById(id)
+				.orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "Not found member"));
 	}
 }

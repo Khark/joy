@@ -8,9 +8,19 @@
 
 <!-- <a th:href="@{https://kauth.kakao.com/oauth/authorize?client_id=${kakaokey}&redirect_uri={REDIRECT_URI}&response_type=code}">회원가입 </a> -->
 
-th:text${to.memberid}
 
+<div th:if="${session.memberid != null}">
+   <form th:action="@{/member/membersSave}" th:object="${memberEntity}" method="post">
+ 
+     닉네임 :  <input type="text" name="nickname">
+     생일 :  <input type="text" name="birth">
+ 	<input type="text" name="memberid" th:value="${session.memberid}"/>
+   
+       <button type="submit" >가입 </button>
+   
+   </form>
+   
+</div>
 
-${sessionScope.memberid}
 </body>
 </html>
