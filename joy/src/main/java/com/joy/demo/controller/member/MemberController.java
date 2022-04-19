@@ -110,10 +110,16 @@ public class MemberController {
 	@PostMapping("membersSave")
 	public String membersSave(@ModelAttribute("MemberTO") @Validated memberEntity memberto ,Model model, HttpServletRequest request) {
 		
-	System.out.println("##"+	memberto.getNickname());
+		String retUrl= "";
+		memberEntity vo = membersvc.crateUser(memberto);
+		if(vo.getResult().equals("present")) {
+			//이미 가입한 회원인 경우임 
+			retUrl="joy/kakao_login";
+		}else if(vo.getResult().equals("ProcessSucess")) {
+			retUrl ="joy/list_Form";
+		}
 		
-		
-		return "joy/list_Form";
+		return retUrl;
 	}
 	
 	@PostMapping("logout")

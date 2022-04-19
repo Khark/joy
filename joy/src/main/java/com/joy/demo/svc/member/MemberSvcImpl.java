@@ -159,27 +159,27 @@ public class MemberSvcImpl implements MemberSvc {
 
 	@Override
 	@Transactional
-	public memberEntity crateUser(tokenEntity to) {
+	public memberEntity crateUser(memberEntity to) {
 		// TODO Auto-generated method stub
 		String result = "";
 		memberEntity vo = new memberEntity();
 		memberEntity memberto = new memberEntity();
 		try {
-			JsonElement je =  to.getElement();
+//			JsonElement je =  to.getElement();
+//			
+//			long id = je.getAsJsonObject().get("id").getAsLong();
 			
-			long id = je.getAsJsonObject().get("id").getAsLong();
-			memberto.setMemberid(id);
+			memberto.setMemberid(to.getMemberid());
 			
-			Optional<memberEntity> opto = memberRepository.findById(id);
+			Optional<memberEntity> opto = memberRepository.findById(to.getMemberid());
 			
 			if(opto.isPresent()) {
-			
 				vo = opto.get();
-				vo.setResult("present");
+				result="present";
 			}else {
 				
-				
 				memberRepository.save(memberto );
+				
 			}
 			
 			
