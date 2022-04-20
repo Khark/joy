@@ -93,11 +93,11 @@ public class MemberController {
 				session.setAttribute("memberid", tokento2.getMemberid());
 				return "member/writeForm";
 			}else {
-				memberEntity to = membersvc.readUser(tokento);
-				session.setAttribute("access_token", tokento.getToken() );
+				memberEntity to = membersvc.readUser(tokento2);
+				session.setAttribute("access_token", tokento2.getToken() );
 				session.setAttribute("memberid", to.getMemberid());
 				session.setAttribute("memberlevel", to.getMemberlevel());
-				return "joy/list_Form";
+				return "joy/listForm";
 			}
 			
 		}
@@ -111,12 +111,12 @@ public class MemberController {
 	public String membersSave(@ModelAttribute("MemberTO") @Validated memberEntity memberto ,Model model, HttpServletRequest request) {
 		
 		String retUrl= "";
-		memberEntity vo = membersvc.crateUser(memberto);
+		memberEntity vo = membersvc.createUser(memberto);
 		if(vo.getResult().equals("present")) {
 			//이미 가입한 회원인 경우임 
 			retUrl="joy/kakao_login";
 		}else if(vo.getResult().equals("ProcessSucess")) {
-			retUrl ="joy/list_Form";
+			retUrl ="member/memberjoin";
 		}
 		
 		return retUrl;

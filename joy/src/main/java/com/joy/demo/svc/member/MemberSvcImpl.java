@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -159,7 +160,7 @@ public class MemberSvcImpl implements MemberSvc {
 
 	@Override
 	@Transactional
-	public memberEntity crateUser(memberEntity to) {
+	public memberEntity createUser(memberEntity to) {
 		// TODO Auto-generated method stub
 		String result = "";
 		memberEntity vo = new memberEntity();
@@ -177,8 +178,9 @@ public class MemberSvcImpl implements MemberSvc {
 				vo = opto.get();
 				result="present";
 			}else {
-				
-				memberRepository.save(memberto );
+				Calendar time = Calendar.getInstance();
+				to.setMemberlevel("1");
+				memberRepository.save(to);
 				
 			}
 			
@@ -197,7 +199,7 @@ public class MemberSvcImpl implements MemberSvc {
 		//memberEntity vo = new memberEntity();
 		//JsonElement element = to.getElement();
 		long id = to.getMemberid();
-		
+		System.out.println("##id?"+id);
 //		Optional<memberEntity> opvo = memberRepository.findById(id);
 //		memberEntity vo = new memberEntity();
 //		if(opvo.isPresent()) {
