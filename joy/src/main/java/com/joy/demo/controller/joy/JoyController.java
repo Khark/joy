@@ -26,6 +26,7 @@ public class JoyController {
 	 public String main(Model model){
 		
 		return "joy/main";
+		//return "/index";
    }
 
 
@@ -55,6 +56,8 @@ public class JoyController {
 	
 	@GetMapping("listForm")
 	public String listForm(@ModelAttribute("JoyTO") @Validated joyEntity joyto, Model model) {
+		System.out.println("#listForm GET>?");
+
 		List<joyEntity> joyvo = new ArrayList<joyEntity>();
 		joyvo = joysvc.selectJoyList(joyto);
 		model.addAttribute("list", joyvo);
@@ -64,7 +67,7 @@ public class JoyController {
 	
 	@PostMapping("listForm")
 	public String listFormPost(@ModelAttribute("JoyTO") @Validated joyEntity joyto, Model model) {
-		
+		System.out.println("#listForm POST?");
 		List<joyEntity> joyvo = new ArrayList<joyEntity>();
 		joyvo = joysvc.selectJoyList(joyto);
 		model.addAttribute("list", joyvo);

@@ -97,7 +97,7 @@ public class MemberController {
 				session.setAttribute("access_token", tokento2.getToken() );
 				session.setAttribute("memberid", to.getMemberid());
 				session.setAttribute("memberlevel", to.getMemberlevel());
-				return "joy/listForm";
+				return "joy/main";
 			}
 			
 		}
