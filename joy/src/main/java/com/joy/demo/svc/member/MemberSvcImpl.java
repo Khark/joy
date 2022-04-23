@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -198,6 +200,8 @@ public class MemberSvcImpl implements MemberSvc {
 		// TODO Auto-generated method stub
 		//memberEntity vo = new memberEntity();
 		//JsonElement element = to.getElement();
+		
+		
 		long id = to.getMemberid();
 		System.out.println("##id?"+id);
 //		Optional<memberEntity> opvo = memberRepository.findById(id);
@@ -209,5 +213,17 @@ public class MemberSvcImpl implements MemberSvc {
 //		}
 		return memberRepository.findById(id)
 				.orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "Not found member"));
+	}
+
+	@Override
+	public String memberlogout(HttpSession session) {
+		// TODO Auto-generated method stub
+		String access_token = (String)session.getAttribute("access_token");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Authorization", "Bearer "+ access_token);
+		URL url = new URL("https://kapi.kakao.com/v1/user/logout");
+		HttpURLConnection conn = HttpURLConnection;
+		//String result = conn.HttpPostConnection("https://kapi.kakao.com/v1/user/logout", map).toString();
+		return null;
 	}
 }

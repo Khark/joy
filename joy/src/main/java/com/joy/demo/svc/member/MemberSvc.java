@@ -15,4 +15,5 @@ public interface MemberSvc {
 	public String memberLogout(HttpSession session) throws IOException;
 	public memberEntity createUser(memberEntity to);
 	public memberEntity readUser(tokenEntity to);
+	public String memberlogout(HttpSession session);
 }

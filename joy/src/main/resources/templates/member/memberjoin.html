@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{decorate/layout}">
-<head>
-</head>
-<!-- <a th:href="@{https://kauth.kakao.com/oauth/authorize?client_id=${kakaokey}&redirect_uri={REDIRECT_URI}&response_type=code}">회원가입 </a> -->
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- hello.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script>
+      alert("hello.html");
+    </script>
+</th:block>
+
 <div layout:fragment="content">
 
-<div th:if="${session.access_token != null}">
-	<p>회원가입 되셨습니다.</p>
-</div>
-<a th:href="@{${kakaouri}}">회원가입</a>
-<a th:href="@{${kakaouri}}">로그인</a>
-
+	<div th:if="${session.access_token != null}">
+		<p>회원가입 되셨습니다.</p>
+	</div>
+	<div th:if="${session.access_token == null}">
+		<a th:href="@{${kakaouri}}">회원가입</a>
+	    <a th:href="@{${kakaouri}}">로그인</a>
+	</div>
 </div>
 </html>

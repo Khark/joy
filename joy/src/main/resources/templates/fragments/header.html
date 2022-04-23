@@ -4,8 +4,18 @@
 <header th:fragment="headerFragment">
 
     <div style="border: 1px solid green">
-        header.html 입니다.
+        <!-- header.html 입니다. -->
+<input type="text" name="memberid" th:value="${session.memberid}"/>   
+	<div th:if="${session.memberid != null}">
+		<a th:href="@{/member/logout}">로그아웃</a>
+	</div>
+	<div th:if="${session.memberid == null}">
+		
+	</div>
+	
+	
     </div>
+
 
 </header>
 

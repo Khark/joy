@@ -1,5 +1,8 @@
 package com.joy.demo.controller.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -124,7 +127,6 @@ public class MemberController {
 	
 	@PostMapping("logout")
 	public String logout(HttpSession session ){
-		
 		
 		
 		return "joy/main";
