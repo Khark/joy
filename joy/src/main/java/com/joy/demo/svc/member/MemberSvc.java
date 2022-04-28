@@ -1,6 +1,7 @@
 package com.joy.demo.svc.member;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +13,7 @@ public interface MemberSvc {
 	public tokenEntity OAuthgetKakaoAccessToken(String token);
 	public tokenEntity accessUser(tokenEntity tokenTo);
 	
-	public String memberLogout(HttpSession session) throws IOException;
 	public memberEntity createUser(memberEntity to);
 	public memberEntity readUser(tokenEntity to);
-	public String memberlogout(HttpSession session);
+	public String memberlogout(HttpSession session) throws IOException;
 }

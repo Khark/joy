@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -118,7 +119,6 @@ public class MemberSvcImpl implements MemberSvc {
 			conn.setRequestProperty("Authorization", "Bearer " + token);
 
 			int resCode = conn.getResponseCode();
-			System.out.println("###responseCode" + resCode);
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
 			String line = "";
@@ -138,10 +138,8 @@ public class MemberSvcImpl implements MemberSvc {
 			vo.setMemberid(id);
 			Optional<memberEntity> opto = memberRepository.findById(id);
 			if(opto.isPresent()) {
-				System.out.println("##aa");
 				vo.setResult("old");
 			}else {
-				System.out.println("##bb");
 				vo.setResult("new");
 			}
 			
@@ -153,12 +151,6 @@ public class MemberSvcImpl implements MemberSvc {
 		return vo;
 	}
 
-	@Override
-	public String memberLogout(HttpSession session) throws IOException {
-		// TODO Auto-generated method stub
-		
-		return null;
-	}
 
 	@Override
 	@Transactional
@@ -216,13 +208,22 @@ public class MemberSvcImpl implements MemberSvc {
 	}
 
 	@Override
-	public String memberlogout(HttpSession session) {
+	public String memberlogout(HttpSession session) throws IOException {
 		// TODO Auto-generated method stub
 		String access_token = (String)session.getAttribute("access_token");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("Authorization", "Bearer "+ access_token);
-		URL url = new URL("https://kapi.kakao.com/v1/user/logout");
-		HttpURLConnection conn = HttpURLConnection;
+		
+		String reqURL = "https://kapi.kakao.com/v1/user/logout";
+		URL url = new URL(reqURL);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("POST");
+		conn.setDoOutput(true);
+		conn.setRequestProperty("Authorization", "Bearer " + access_token);
+		//String result = conn.HttpPostConnection("https://kapi.kakao.com/v1/user/logout", map).toString();
+		//System.out.println(result);
+		
+		//HttpURLConnection conn = 
 		//String result = conn.HttpPostConnection("https://kapi.kakao.com/v1/user/logout", map).toString();
 		return null;
 	}
