@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.entity.maria.boardEntity;
 import com.joy.demo.svc.basicboard.BasicBoardSvc;
 
@@ -18,31 +20,38 @@ public class BoardController {
 	@Autowired
 	BasicBoardSvc boardsvc;
 	
-	@GetMapping("boardslist")
-	public String boardsList(@ModelAttribute("BoardTO") @Validated boardEntity BoardTO, Model model) {
+	@GetMapping("boardlist")
+	public String boardsList(Model model, @RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "5") Integer size ) {
+	
+		model.addAttribute("list" , boardsvc.findList(page, size));
 		
-		return "board/boardslist";
+		return "board/boardlist";
 	}
 	
-	@GetMapping("boardsinfo")
-	public String boardsinfo(@ModelAttribute("BoardTO") @Validated boardEntity BoardTO, Model model) {
+	@GetMapping("boardinfo")
+	public String boardsinfo(@ModelAttribute("boardEntity") @Validated boardEntity boardEntity, Model model) {
 		
-		return "board/boardsinfo";
+		return "board/boardinfo";
 
 	}
 	
-	@GetMapping("boardswirte")
-	public String boardswrite(@ModelAttribute("BoardTO") @Validated boardEntity BoardTO, Model model) {
-		
-		return "board/boardswirte";
+	@GetMapping("boardwrite")
+	public String boardswrite(@ModelAttribute("boardReqDto") @Validated boardReqDto boardReqDto, Model model) {
+
+		// modelAttribute 의 내용이 타임리프의 폼과 일치 해야하나봐?
+	//	boardEntity.setHits(0);
+	//	boardEntity.setDelyn('N');
+	//	model.addAttribute("boardEntity", boardEntity);
+		System.out.println("####???");
+		return "board/boardwrite";
 
 	}
 	
-	@PostMapping("boardswirte")
-	public String boardswritePost(@ModelAttribute("BoardTO") @Validated boardEntity BoardTO, Model model) {
+	@PostMapping("boardwrite")
+	public String boardswritePost(boardReqDto BoardTO, Model model) {
 		
-		
-		return "board/boardsinfo";
+		boardsvc.save(BoardTO);
+		return "board/boardinfo";
 		
 	}
 	

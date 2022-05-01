@@ -10,21 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
+import org.junit.runner.RunWith;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+@Table(name="boardtable")
+@Entity(name="boardtable") // entity <-> jpa <-> db.tables
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(name = "BOARD_SEQ_GEN", // 시퀀스 제너레이터 이름
 sequenceName = "BOARD_SEQ", // 시퀀스 이름
 initialValue = 1, // 시작값
 allocationSize = 1 // 메모리를 통해 할당할 범위 사이즈
 )
-@Table(name="boardtable")
-@Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name="boardtable")
 public class boardEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, // 사용할 전략을 시퀀스로 선택
@@ -36,18 +40,17 @@ public class boardEntity {
 	private String title;
 	private String content;
 	private String writer;
-	private int hits;
+	private Integer hits;
 	private char delyn;
-	
-	private LocalDateTime createDate = LocalDateTime.now();
-	private LocalDateTime modifedDate ;
+	private LocalDateTime createdate = LocalDateTime.now();
+	private LocalDateTime modifieddate ;
 	
     @Builder
-    public boardEntity(String title, String content, String writer, int hits, char deleteYn) {
+    public boardEntity(String title, String content, String writer, Integer hits) {
         this.title = title;
         this.content = content;
         this.writer = writer;
-        this.hits = hits;
-        this.delyn = deleteYn;
+        this.hits = 0;
+        this.delyn = 'N';
     }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>게시글 번호</th>
+				<th>title</th>
+				<th>writer</th>
+				<th>createdate</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<!-- <tr th:each="list,index : ${resultMap.list}" th:width="paging=${resultMap.paging}">
+				<td>
+					<span th:text="${(resultMap.totalCnt - index.index) - (paging.pageNumber * paging.pageSize)}"></span> 
+				</td>
+				<td>
+				<a th:href="@{./view(id=${list.id})}">
+					<span th:text="${list.title}"></span>
+				</a>
+				</td>
+				<td>
+					<span th:text="${list.writer}"></span>
+				</td>
+				<td>
+				</td> -->
+		</tbody>
+	<!-- 	<button type="button" onclick="javascript:location.href='board/boardwrite'" ></button>
+	 -->
+	</table>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/board/boardwrite}" th:object="${boardReqDto}" method="post">
+
+            <input type="text" th:field="*{title}" placeholder="제목 입력 ">
+           	<input type="text" th:field="*{content}" placeholder="내용 입력 ">
+           	<input type="text" th:field="*{writer}" placeholder="작성자 입력 ">
+           	<input type="text" th:filed="*{hits}" th:value="1" placeholder="1">
+           	<input type="text" th:filed="*{delyn}" th:value="N">
+
+ 	<table border=1>
+ 
+    </table>
+    <button type="submit" >입력</button>
+
+
+</form> 
+</body>
+</html>
