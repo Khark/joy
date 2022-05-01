@@ -85,9 +85,8 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 		Page <boardEntity>  list = boardRepository.findAll(PageRequest.of(page, size));
 		System.out.println("#######ee");
 		// 위 리스트는 boardEntity 의 리턴값을 가지고 있고 이를 가공하기 위해서는 boardEntity 를 객체로 받아와 return 해주는 것이 필요하기에?
-		list.stream().map(boardResDto::new).collect(Collectors.toList());
-		
-		resultMap.put("list", list);
+	
+		resultMap.put("list", list.stream().map(boardResDto::new).collect(Collectors.toList()));
 		resultMap.put("paging", list.getPageable());
 		resultMap.put("totalCnt", list.getTotalElements());
 		resultMap.put("totalPage", list.getTotalPages());

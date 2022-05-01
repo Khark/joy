@@ -23,7 +23,7 @@ public class BoardController {
 	@GetMapping("boardlist")
 	public String boardsList(Model model, @RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "5") Integer size ) {
 	
-		model.addAttribute("list" , boardsvc.findList(page, size));
+		model.addAttribute("resultMap" , boardsvc.findList(page, size));
 		
 		return "board/boardlist";
 	}
