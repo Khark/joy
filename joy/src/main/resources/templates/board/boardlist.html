@@ -19,7 +19,15 @@
 		<tbody>
 			<tr th:each="list,index : ${resultMap.list}" >
 				<td>
+					<span></span>
+				</td>
+				<td>
+
 					<span th:text="${list.title}"></span>
+				</td>
+				
+				<td>
+					<span th:text="${list.writer}"></span>
 				</td>
 			<!-- 	<td>
 					<span th:text="${(resultMap.totalCnt - index.index) - (paging.pageNumber * paging.pageSize)}"></span> 
