@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
-import org.junit.runner.RunWith;
 
 import lombok.AccessLevel;
 import lombok.Builder;
