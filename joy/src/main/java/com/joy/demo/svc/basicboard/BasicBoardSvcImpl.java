@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transaction;
 
 import org.junit.jupiter.api.Test;
@@ -29,8 +31,10 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	@Autowired
 	BoardRepository boardRepository;
 	
+	@PersistenceContext
+	EntityManager em;
+	
 	@Override
-	@Test
 	public void save() {
 		// TODO Auto-generated method stub
 //		boardEntity params = boardEntity.builder()
@@ -79,8 +83,7 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	public HashMap<String , Object> findList(Integer page, Integer size) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		System.out.println("#######sss");
-		BoardRepository.aa(null, null);
+		BoardRepository.aa(em, "1");
 		Page <boardEntity>  list = boardRepository.findAll(PageRequest.of(page, size));
 		// 위 리스트는 boardEntity 의 리턴값을 가지고 있고 이를 가공하기 위해서는 boardEntity 를 객체로 받아와 return 해주는 것이 필요하기에?
 	
@@ -101,6 +104,7 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	}
 
 	@Override
+	
 	public boardResDto findById(Long id) {
 		// TODO Auto-generated method stub
 		return new boardResDto(boardRepository.findById(id).get());

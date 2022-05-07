@@ -18,6 +18,8 @@ import com.joy.demo.entity.maria.memberEntity;
 
 public interface BoardRepository extends JpaRepository<boardEntity, Long>{
 
+	
+	
 	String MODIFY_BOARD = "UPDATE BOARDTABLE SET "+
 				"TITLE = :#{#boardEntity.title},"+
 				"CONTENT = :#{#boardEntity.content},"+
@@ -33,8 +35,8 @@ public interface BoardRepository extends JpaRepository<boardEntity, Long>{
 
 
 	public static void aa(EntityManager em, String param1) {
-		String LIST_BOARD =  "SELECT TITLE, WRITER, HITS FROM BOARDTABLE"
-				+" WHERE DELYN ='N'";
+		String LIST_BOARD =  "SELECT title, writer, hits FROM boardtable"
+				+" WHERE delyn ='N'";
 		TypedQuery<boardEntity> query= em.createQuery(LIST_BOARD, boardEntity.class);
 
 		List<boardEntity> list =   query.getResultList();
