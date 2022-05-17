@@ -1,6 +1,7 @@
 package com.joy.demo.svc.basicboard;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.dto.maria.board.boardResDto;
@@ -8,7 +9,7 @@ import com.joy.demo.dto.maria.board.boardResDto;
 public interface BasicBoardSvc {
 
 	void save();
-	void findAll();
+	List<boardReqDto> findAll();
 	void delete();
 	
 	Long save(boardReqDto dto);

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +17,7 @@ import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.entity.maria.boardEntity;
 import com.joy.demo.entity.maria.memberEntity;
 
-public interface BoardRepository extends JpaRepository<boardEntity, Long>{
+public interface BoardRepository extends JpaRepository<boardReqDto, Long>{
 
 	
 	
@@ -45,4 +46,6 @@ public interface BoardRepository extends JpaRepository<boardEntity, Long>{
 		}
 		
 	}
+	
+	
 }

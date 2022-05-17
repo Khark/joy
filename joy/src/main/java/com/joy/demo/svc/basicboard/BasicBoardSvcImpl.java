@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,9 +53,11 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	}
 
 	@Override
-	public void findAll() {
+	public List<boardReqDto>  findAll() {
 		// TODO Auto-generated method stub
-		
+		Sort sort = Sort.by(Direction.DESC, "id", "createdDate");
+        List<boardReqDto> list = boardRepository.findAll(sort);
+        return list.stream().map(boardReqDto::new).collect(Collectors.toList());
 	}
 
 	@Override
