@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.dto.maria.board.boardResDto;
+import com.joy.demo.entity.maria.boardEntity;
 import com.joy.demo.repository.maria.board.BoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -62,6 +63,22 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
 		boardRepository.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public HashMap<String, Object> findAll(Integer page, Integer size) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object> ();
+		
+		Page<boardEntity> list = boardRepository.findAll(PageRequest.of(page, size));
+		
+		resultMap.put("list", list.stream().map(boardResDto::new).collect(Collectors.toList()) );
+		resultMap.put("paging", list.getPageable());
+		resultMap.put("totalCnt", list.getTotalElements());
+		resultMap.put("totalPage", list.getTotalPages());
+		
+		return resultMap;
 	}
 	
 	

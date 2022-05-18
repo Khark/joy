@@ -14,6 +14,8 @@ import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.entity.maria.boardEntity;
 import com.joy.demo.svc.basicboard.BasicBoardSvc;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.throwsSpec_return;
+
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
@@ -21,9 +23,16 @@ public class BoardController {
 	BasicBoardSvc boardsvc;
 	
 	@GetMapping("boardlist")
-	public String boardsList(Model model, @RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "5") Integer size ) {
+	public String boardsList(Model model, @RequestParam(required = false, defaultValue = "0") 
+	Integer page, @RequestParam(required = false, defaultValue = "5") Integer size ) throws Exception {
+		try {
+			
+			model.addAttribute("resultMap" , boardsvc.findAll(page, size));
 	
-		model.addAttribute("resultMap" , boardsvc.findList(page, size));
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		
 		return "board/boardlist";
 	}

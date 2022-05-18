@@ -23,4 +23,5 @@ public interface BasicBoardSvc {
 	public boardResDto findById(Long id);
 	public int updateBoard(boardReqDto dto);
 	public void deleteById(Long id);
+	HashMap<String , Object> findAll(Integer page, Integer size);
 }
