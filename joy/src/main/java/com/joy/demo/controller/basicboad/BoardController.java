@@ -66,11 +66,11 @@ public class BoardController {
 	}
 
 	@GetMapping("view")
-	public String getBoardViewPage(ModelMap model, boardReqDto req) {
+	public String getBoardViewPage(ModelMap model, boardReqDto dto) {
 		
 		try {
-			if(req.getId() != null) {
-				model.addAttribute("info" , boardsvc.findById(req.getId()) );
+			if(dto.getId() != null) {
+				model.addAttribute("info" , boardsvc.findById(dto.getId()) );
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -80,6 +80,26 @@ public class BoardController {
 		return "board/boardview";
 	}
 	
+	@GetMapping("modify")
+	public String getBoardModifyPage(ModelMap model, boardReqDto dto) {
+		
+		try {
+			if(dto.getId() != null) {
+				model.addAttribute("info" , boardsvc.findById(dto.getId()) );
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return "board/boardmodify";
+	}
 	
+	@PostMapping("modify")
+	public String getBoardModifyPagePOST(ModelMap model, boardReqDto dto) {
+		
+		
+		return "";
+	}
 }
 
