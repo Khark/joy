@@ -19,18 +19,27 @@
 		<tbody>
 			<tr th:each="list,index : ${resultMap.list}" >
 				<td>
-					<span></span>
+					<span th:text="${list.id}"></span>
 				</td>
 				<td>
-
-					<span th:text="${list.title}"></span>
+					<a th:href="@{./view(id=${list.id})}">
+						<span th:text="${list.title}"></span>
+					</a>
 				</td>
 				
 				<td>
 					<span th:text="${list.writer}"></span>
 				</td>
-				</tr>
+				<td>
+				<!-- <span th:text="${#dates.format(list.createDate, 'yyyy-MM-dd HH:mm:ss') }"></span> -->
+					<!--  <span th:text="${list.createDate}"></span>  -->
+						 <!-- <span th:text="${#temporals.formatISO(list.createDate)}"></span>  -->
+						 <span th:text="${#temporals.format(list.createDate , 'yyyy-MM-dd HH:mm')}"></span>
+				</td>
+
+			</tr>
 		</tbody>
+		<a th:href="@{./boardwrite}"> <span>작</span> </a>
 	</table>
 
 

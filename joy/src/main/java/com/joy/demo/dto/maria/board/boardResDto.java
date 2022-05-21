@@ -3,7 +3,6 @@ package com.joy.demo.dto.maria.board;
 import java.time.LocalDateTime;
 
 import com.joy.demo.entity.maria.boardEntity;
-import com.joy.demo.repository.maria.board.Board;
 
 import lombok.Getter;
 
