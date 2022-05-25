@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<form th:action="@{/board/boardwrite}" th:object="${boardReqDto}" method="post">
 
-            <input type="text" th:field="*{title}" placeholder="제목 입력 ">
+<th:block>
+<form id="frm" th:action="@{/board/boardwrite}" th:object="${boardReqDto}" method="post">
+
+            <input type="text" th:field="*{title}" placeholder="제목 입력 " required>
            	<input type="text" th:field="*{content}" placeholder="내용 입력 ">
            	<input type="text" th:field="*{writer}" placeholder="작성자 입력 ">
            	<input type="text" th:filed="*{hits}" th:value="1" placeholder="1">
@@ -16,9 +19,30 @@
  	<table border=1>
  
     </table>
-    <button type="submit" >입력</button>
+    <button type="submit" onclick="fnSubmit();" >입력</button>
 
 
 </form> 
+	<script th:inline="javascript">
+		let frm = $("#frm");
+		
+		function fnSubmit(){
+			$("#frm").submit();
+		}
+		
+		$(function() {
+			
+			
+			messages: {
+				title :{
+					required : "aaa"				
+				}
+			},
+			submitHandler: function(form) {
+				form.submit();
+			}
+		});
+	</script>
+</th:block>
 </body>
 </html>
