@@ -13,10 +13,10 @@ public interface BoardRepository extends JpaRepository<boardEntity, Long>{
 
 	
 	
-	String MODIFY_BOARD = "UPDATE BOARDTABLE SET "+
-				"TITLE = :#{#boardReqDto.title},"+
-				"CONTENT = :#{#boardReqDto.content},"+
-				"MODIFIEDDATE = NOW()"+
+	String MODIFY_BOARD = "UPDATE boardtable SET "+
+				"TITLE = :#{#boardReqDto.title}, "+
+				"CONTENT = :#{#boardReqDto.content} "+
+				
 				"WHERE ID = :#{#boardReqDto.id} ";
 	
 	@Transactional
@@ -24,6 +24,22 @@ public interface BoardRepository extends JpaRepository<boardEntity, Long>{
 	@Query(value = MODIFY_BOARD, nativeQuery = true)
 	public int updateBoard(@Param("boardReqDto") boardReqDto boardReqDto);
 	
+	
+	static final String UPDATE_BOARD_READ_CNT_INC = "UPDATE BOARDTABLE SET "+
+							"HITS = HITS +1"+
+							"WHERE ID = :id";
+	
+	@Transactional
+	@Modifying
+	@Query(value ="UPDATE_BOARD_READ_CNT_INC", nativeQuery = true)
+	public int updateBoardReadCntInc(@Param("id") Long id);
+	
+	static final String DELETE_BOARD = "DELETE FROM TBLBOARDTABLE WHERE ID = (:deleteList)";
+	
+	@Transactional
+	@Modifying
+	@Query(value="DELETE_BOARD" , nativeQuery =  true)
+	public int deleteBoard(@Param("deleteList") Long[] deleteList );
 	
 
 //

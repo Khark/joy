@@ -15,6 +15,8 @@ import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.entity.maria.boardEntity;
 import com.joy.demo.svc.basicboard.BasicBoardSvc;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.throwsSpec_return;
+
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
@@ -96,10 +98,18 @@ public class BoardController {
 	}
 	
 	@PostMapping("modify")
-	public String getBoardModifyPagePOST(ModelMap model, boardReqDto dto) {
+	public String getBoardModifyPagePOST(ModelMap model, boardReqDto dto) throws Exception{
 		
+		try {
+			int result = boardsvc.updateBoard(dto);
+			if(result <1) {
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		
-		return "";
+		return "redirect:/board/boardlist";
 	}
 }
 
