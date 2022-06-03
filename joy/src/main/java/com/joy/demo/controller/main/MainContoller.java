@@ -17,7 +17,7 @@ public class MainContoller {
 	@Autowired
 	private accountSvc accountsvc;
 
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String homeView() {
 		System.out.println("######?");
 		return "main/home";
