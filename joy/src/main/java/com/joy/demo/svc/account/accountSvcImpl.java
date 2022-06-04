@@ -1,3 +1,4 @@
+
 package com.joy.demo.svc.account;
 
 import java.time.LocalDateTime;
@@ -36,7 +37,6 @@ public class accountSvcImpl implements accountSvc {
 		List<GrantedAuthority> authorites = new ArrayList<>();
 		
 		authorites.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
-
 		
 		return new User( accountEntity.getAccount() , accountEntity.getPassword() ,authorites );
 	}

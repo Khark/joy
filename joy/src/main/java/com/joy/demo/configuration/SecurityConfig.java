@@ -42,16 +42,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+    	// authorizeRequests 는 시큐리티 처리에 HttpServletRequest를 이용한다는 것을 의미함 
+    	// antMatchers 는 특정한 경로를 지정
+    	// permitAll 는 모든 사용자가 접근 가능함을 의미
+    	// hasRole 는 시스템상에서 특정 권한을 지닌 사람만 접근이 가능함
+    	// 
+    	
+    	
         http.authorizeRequests()
                 .antMatchers("/member/**").authenticated()
                 .antMatchers("/admin/**").authenticated()
-                .antMatchers("/**").permitAll();
-
+                .antMatchers("/joy/**").authenticated()
+                .antMatchers("/board/**").hasRole("MEMBER")
+               /// .antMatchers("/**").permitAll()
+              
+               // .antMatchers("/board/**").hasRole("ROLE_MEMBER")
+                ;
+        	
+        		
+        
+        // form 태그 기반의 로그인을 지원
         http.formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/")
                 .permitAll();
-
+        		
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
