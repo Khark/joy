@@ -2,15 +2,15 @@ package com.joy.demo.controller.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.joy.demo.dto.maria.account.accountTO;
 import com.joy.demo.svc.account.accountSvc;
 
-@RestController
+@Controller
 @RequestMapping(path = "/")
 public class MainContoller {
 
@@ -19,7 +19,6 @@ public class MainContoller {
 
 	@GetMapping("/home")
 	public String homeView() {
-		System.out.println("######?");
 		return "main/home";
 	}
 
