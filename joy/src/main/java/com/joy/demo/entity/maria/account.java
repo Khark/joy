@@ -37,14 +37,18 @@ public class account {
 	@Column(name = "reg_dt")
 	private LocalDateTime regDt;
 	
+	@Column(length =11 , nullable = false)
+	private Integer role;
+	
 	public account() {
 		
 	}
 
-	public account(Integer id , String name , String account, String password) {
+	public account(Integer id , String name , String account, String password, Integer role) {
 		this.id = id;
 		this.name = name;
 		this.account = account;
 		this.password = password;
+		this.role = role;
 	}
 }

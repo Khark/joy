@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class accountTO {
+public class accountReqDto {
 
 	private Integer id;
 	private String name;
@@ -17,8 +17,8 @@ public class accountTO {
 	private String password;
 	private LocalDateTime lastAccessDt;
 	private LocalDateTime regDt;
-	
+	private Integer role;
 	public account toEntity() {
-		return new account(id, name, account, password);
+		return new account(id, name, account, password, role);
 	}
 }

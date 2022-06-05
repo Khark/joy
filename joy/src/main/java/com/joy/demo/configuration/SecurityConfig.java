@@ -52,8 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/member/**").authenticated()
                 .antMatchers("/admin/**").authenticated()
-                .antMatchers("/joy/**").authenticated()
+                .antMatchers("/joy/**").hasRole("ADMIN")
                 .antMatchers("/board/**").hasRole("MEMBER")
+                
                /// .antMatchers("/**").permitAll()
               
                // .antMatchers("/board/**").hasRole("ROLE_MEMBER")
@@ -64,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // form 태그 기반의 로그인을 지원
         http.formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/home") // 성공했을 때 가는 주소 
                 .permitAll();
         		
         http.logout()

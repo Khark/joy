@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.joy.demo.dto.maria.account.accountTO;
+import com.joy.demo.dto.maria.account.accountReqDto;
 import com.joy.demo.svc.account.accountSvc;
 
 @Controller
@@ -33,11 +33,23 @@ public class MainContoller {
 	}
 
 	@PostMapping("/signup")
-	public String signup(accountTO accountto) {
+	public String signup(accountReqDto accountto) {
 		accountsvc.save(accountto);
 		return "redirect:/login";
 	}
 
+	@GetMapping("/admin_signup")
+	public String admin_signupView() {
+		return "main/signup";
+	}
+
+	@PostMapping("/admin_signup")
+	public String admin_signup(accountReqDto accountto) {
+		accountsvc.save(accountto);
+		return "redirect:/login";
+	}
+
+	
 	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/member/info")
 	public String userInfoView() {

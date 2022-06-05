@@ -21,6 +21,7 @@ import com.joy.demo.advice.SessionConstants;
 import com.joy.demo.entity.maria.memberEntity;
 import com.joy.demo.entity.maria.tokenEntity;
 import com.joy.demo.entity.mongo.joyEntity;
+import com.joy.demo.svc.account.accountSvc;
 import com.joy.demo.svc.member.MemberSvc;
 
 @Controller
@@ -32,6 +33,8 @@ public class MemberController {
 	MemberSvc membersvc;
 	@Value("${user.kakaokey}")
 	private String kakaokey;
+	@Autowired 
+	accountSvc accountsvc;
 	
 	@GetMapping("memberdummyview")
 	public String memberdummyview() {
@@ -61,13 +64,11 @@ public class MemberController {
 	
 	@GetMapping("join")
 	public String kakaoJoin(Model model) {
-		System.out.println("###122");
 
 		model.addAttribute("kakaokey", kakaokey);
 		
 		model.addAttribute("REDIRECT_URI", "http://localhost:8081/member/kakao_login");
 		model.addAttribute("code", "code");
-		System.out.println("##kakaokey?"+kakaokey);
 //		<!-- <a th:href="@{https://kauth.kakao.com/oauth/authorize(client_id = ${kakaokey), redirect_uri=${REDIRECT_URI} , response_type=${code }">회원가입 </a>
 //		 -->
 		String redirecturi = "http://localhost:8081/member/kakao_login";
@@ -132,5 +133,19 @@ public class MemberController {
 		return "joy/main";
 	}
 	
+	@GetMapping("list")
+	public String memberlist(Model model, @RequestParam(required = false, defaultValue = "0") 
+	Integer page, @RequestParam(required = false, defaultValue = "5") Integer size ) throws Exception {
+		try {
+			
+			model.addAttribute("resultMap" , accountsvc.findAll(page, size));
+	
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return "member/memberlist";
+	}
 	
 }
