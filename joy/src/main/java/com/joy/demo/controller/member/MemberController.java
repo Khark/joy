@@ -1,13 +1,13 @@
 package com.joy.demo.controller.member;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.joy.demo.advice.SessionConstants;
 import com.joy.demo.entity.maria.memberEntity;
 import com.joy.demo.entity.maria.tokenEntity;
-import com.joy.demo.entity.mongo.joyEntity;
 import com.joy.demo.svc.account.accountSvc;
 import com.joy.demo.svc.member.MemberSvc;
 
@@ -137,6 +135,9 @@ public class MemberController {
 	public String memberlist(Model model, @RequestParam(required = false, defaultValue = "0") 
 	Integer page, @RequestParam(required = false, defaultValue = "5") Integer size ) throws Exception {
 		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userdetail = (UserDetails) authentication.getPrincipal();
+			System.out.println("##authorities?"+userdetail.getAuthorities());
 			
 			model.addAttribute("resultMap" , accountsvc.findAll(page, size));
 	

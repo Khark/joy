@@ -16,6 +16,16 @@
         <div>
             <a th:href="@{/member/info}">내 정보</a>
             <a th:href="@{/admin}">관리자</a>
+            
+            <div sec:authentication="principal.authorities"></div>
+       		<!-- <span th:if="${principal.authorities.toString.equals('ROLE_ADMIN')}">
+       		</span> -->
+       
+			<div sec:authorize="isAuthenticated()">11</div> <!--  권한이 있는경우 true -->
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<a sec:ahtorize="hasRole('ROLE_ADMIN')" th:href="@{/member/list}">회원관리</a>				
+			</div> <!-- 관리자 권한인 경우 true -->
+			<div sec:authorize="hasRole('ROLE_USER')">33</div> <!-- 사용자 권한인 경우 true -->
         </div>
     </body>
 </html>

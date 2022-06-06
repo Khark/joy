@@ -50,12 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	
     	
         http.authorizeRequests()
-                .antMatchers("/member/**").authenticated()
+               // .antMatchers("/member/**").authenticated()
                 .antMatchers("/admin/**").authenticated()
                 .antMatchers("/joy/**").hasRole("ADMIN")
                 .antMatchers("/board/**").hasRole("MEMBER")
-                
-               /// .antMatchers("/**").permitAll()
+                .antMatchers("/member/list/**").hasRole("ADMIN")
+                .antMatchers("/member/**").authenticated()
+                /// .antMatchers("/**").permitAll()
               
                // .antMatchers("/board/**").hasRole("ROLE_MEMBER")
                 ;
@@ -80,6 +81,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(accountsvc).passwordEncoder(passwordEncoder());
+    }
+    @Configuration
+    @EnableGlobalMethodSecurity(securedEnabled =  true, prePostEnabled =  true, jsr250Enabled = true)
+    public class MethodSecurity2{
+    	
     }
 
 }
