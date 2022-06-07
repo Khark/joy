@@ -73,7 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true);
-
+        // 세션timeout 은 application.yml 에 설정한다. 
+        
         http.exceptionHandling()
                 .accessDeniedPage("/denied");
     }

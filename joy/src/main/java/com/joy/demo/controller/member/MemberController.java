@@ -126,7 +126,8 @@ public class MemberController {
 	
 	@PostMapping("logout")
 	public String logout(HttpSession session ){
-		
+		session.invalidate();
+		// securityConfig 에서 호출 되며 session해
 		
 		return "joy/main";
 	}
