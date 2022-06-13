@@ -1,31 +1,36 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" 
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+     
     <head>
         <meta charset="UTF-8">
         <title>Home</title>
     </head>
-    <body>
+    <div layout:fragment="content">
+  	<!--  body tag 를 안쓴다... 무엇..?! -->
+     <th:block layout:fragment="css"> </th:block>
         <h1>Home Page</h1>
         <hr>
-        <div>
-            <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
-            <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
-            <a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
-            <a sec:authorize="isAnonymous()" th:href="@{/admin_signup}">관리자가입</a>
-        </div>
-        <div>
-            <a th:href="@{/member/info}">내 정보</a>
-            <a th:href="@{/admin}">관리자</a>
-            
-            <div sec:authentication="principal.authorities"></div>
-       		<!-- <span th:if="${principal.authorities.toString.equals('ROLE_ADMIN')}">
-       		</span> -->
-       
-			<div sec:authorize="isAuthenticated()">11</div> <!--  권한이 있는경우 true -->
-			<div sec:authorize="hasRole('ROLE_ADMIN')">
-				<a sec:ahtorize="hasRole('ROLE_ADMIN')" th:href="@{/member/list}">회원관리</a>				
-			</div> <!-- 관리자 권한인 경우 true -->
-			<div sec:authorize="hasRole('ROLE_USER')">33</div> <!-- 사용자 권한인 경우 true -->
-        </div>
-    </body>
+	        <div>
+	            <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+	            <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+	            <a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+	            <a sec:authorize="isAnonymous()" th:href="@{/admin_signup}">관리자가입</a>
+	        </div>
+	        <div>
+	            <a th:href="@{/member/info}">내 정보</a>
+	            <a th:href="@{/admin}">관리자</a>
+	            
+	            <div sec:authentication="principal.authorities"></div>
+	       		<!-- <span th:if="${principal.authorities.toString.equals('ROLE_ADMIN')}">
+	       		</span> -->
+	       
+				<div sec:authorize="isAuthenticated()">\</div> <!--  권한이 있는경우 true -->
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<a sec:ahtorize="hasRole('ROLE_ADMIN')" th:href="@{/member/list}">회원관리</a>				
+				</div> <!-- 관리자 권한인 경우 true -->
+				<div sec:authorize="hasRole('ROLE_USER')">33</div> <!-- 사용자 권한인 경우 true -->
+	        </div>
+	        </div>
 </html>

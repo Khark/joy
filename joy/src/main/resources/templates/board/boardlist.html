@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout"	
+>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+ <th:block layout:fragment="css"> </th:block>
 
+  <!-- hello.html 고유 스크립트 추가 -->
+  <th:block layout:fragment="script">
+    <!-- <script>
+      alert("hello.html");
+    </script> -->
+  </th:block>
+  <div layout:fragment="content">
+</div>
+	<ul>
+		<li th:with ="item=${resultMap.list[0]}">
+			${item.title}	
+		</li>
+	</ul>
 	<table>
 		<thead>
 			<tr>
@@ -17,13 +34,17 @@
 			</tr>
 		</thead>
 		<tbody>
+	
 			<tr th:each="list,index : ${resultMap.list}" >
 				<td>
 					<span th:text="${list.id}"></span>
 				</td>
 				<td>
 					<a th:href="@{./view(id=${list.id})}">
+						
 						<span th:text="${list.title}"></span>
+						[[${list.title}]]// 
+						<!-- 타임리프 사용 표현방식이다.  -->
 					</a>
 				</td>
 				

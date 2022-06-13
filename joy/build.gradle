@@ -38,6 +38,8 @@ dependencies {
 	// testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'com.google.code.gson:gson:2.8.7'
 	implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.2.2'
+	implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.4.RELEASE'
+
 
 }
 

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <header th:fragment="headerFragment">
 
     <div style="border: 1px solid green">
         <!-- header.html 입니다. -->
-<input type="text" name="memberid" th:value="${session.memberid}"/>   
-	<div th:if="${session.memberid != null}">
-		<a th:href="@{/member/logout}">로그아웃</a>
-	</div>
-	<div th:if="${session.memberid == null}">
+		<div th:if="${session.memberid != null}">
+			<a th:href="@{/member/logout}">로그아웃</a>
+		</div>
+		<div th:if="${session.memberid == null}">
+		</div>
+		<div sec:authorize="isAuthenticated()">
+		 <span sec:authentication="name"></span> [[${name}]]님 반갑습니다.
+		 <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+			
+		</div> <!--  권한이 있는경우 true -->
 		
-	</div>
-	
-	
+		
     </div>
 
 
