@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/layout"	
->
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
- <th:block layout:fragment="css"> </th:block>
-
-  <!-- hello.html 고유 스크립트 추가 -->
-  <th:block layout:fragment="script">
-    <!-- <script>
-      alert("hello.html");
-    </script> -->
-  </th:block>
-  <div layout:fragment="content">
-</div>
+<html xmlns:th="http://www.w3.org/1999/xhtml" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+     
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <div layout:fragment="content">
 	<ul>
-		<li th:with ="item=${resultMap.list[0]}">
-			${item.title}	
-		</li>
 	</ul>
 	<table>
 		<thead>
 			<tr>
+				<th>No.</th>
 				<th>게시글 번호</th>
 				<th>title</th>
 				<th>writer</th>
@@ -36,6 +23,12 @@
 		<tbody>
 	
 			<tr th:each="list,index : ${resultMap.list}" >
+			<!-- 반복 오브젝트 명 , 변수명   -->
+				<td>
+					[[${index.index}]]
+					[[${index.count}]]
+					 <!--  jstl 의 c:forEach와 사용법이 같음   -->
+				</td>
 				<td>
 					<span th:text="${list.id}"></span>
 				</td>
@@ -52,10 +45,9 @@
 					<span th:text="${list.writer}"></span>
 				</td>
 				<td>
-				<!-- <span th:text="${#dates.format(list.createDate, 'yyyy-MM-dd HH:mm:ss') }"></span> -->
-					<!--  <span th:text="${list.createDate}"></span>  -->
-						 <!-- <span th:text="${#temporals.formatISO(list.createDate)}"></span>  -->
-						 <span th:text="${#temporals.format(list.createDate , 'yyyy-MM-dd HH:mm')}"></span>
+					<span th:text="${#temporals.format(list.createDate , 'yyyy-MM-dd HH:mm')}"></span>//
+					<th:block th:text="${#temporals.format(list.createDate , 'yyyy-MM-dd HH:mm')}"/>
+					<!-- th:block 는 컴파일 되면서사라져 -->
 				</td>
 
 			</tr>
@@ -63,6 +55,5 @@
 	
 	</table>		
 	<a th:href="@{./boardwrite}"> <span>작성</span> </a>
-	
-</body>
+	</div>
 </html>
