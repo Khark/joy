@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" 
+	  xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
      
@@ -54,6 +55,8 @@
 		</tbody>
 	
 	</table>		
-	<a th:href="@{./boardwrite}"> <span>작성</span> </a>
+		<div sec:authorize="isAuthenticated()">
+			<a th:href="@{./boardwrite}"> <span>작성</span> </a>
+		</div>	
 	</div>
 </html>

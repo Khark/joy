@@ -27,7 +27,7 @@
 	       		<!-- <span th:if="${principal.authorities.toString.equals('ROLE_ADMIN')}">
 	       		</span> -->
 	       
-				<div sec:authorize="isAuthenticated()">\</div> <!--  권한이 있는경우 true -->
+				<div sec:authorize="isAuthenticated()"></div> <!--  권한이 있는경우 true -->
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<a sec:ahtorize="hasRole('ROLE_ADMIN')" th:href="@{/member/list}">회원관리</a>				
 				</div> <!-- 관리자 권한인 경우 true -->
