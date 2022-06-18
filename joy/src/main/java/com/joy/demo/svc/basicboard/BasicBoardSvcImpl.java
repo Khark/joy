@@ -37,7 +37,12 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	@Transactional
 	public Long save(boardReqDto dto) {
 		// TODO Auto-generated method stub
-		return boardRepository.save(dto.toEntity()).getId();
+		Long boardcnt = null;
+		
+		for(int i = 0 ; i < 2000; i ++) {
+			boardcnt =+ boardRepository.save(dto.toEntity()).getId();
+		}
+		return boardcnt;
 	}
 
 	@Override
@@ -71,12 +76,17 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<String, Object> ();
 		
-		Page<boardEntity> list = boardRepository.findAll(PageRequest.of(page, size));
+		Page<boardEntity> list = boardRepository.findAll(PageRequest.of(page, size, Sort.Direction.DESC,"id" ));
 		
 		resultMap.put("list", list.stream().map(boardResDto::new).collect(Collectors.toList()) );
 		resultMap.put("paging", list.getPageable());
+		
 		resultMap.put("totalCnt", list.getTotalElements());
 		resultMap.put("totalPage", list.getTotalPages());
+		resultMap.put("nowcnt", page);
+		
+		System.out.println("##pageable?"+list.getPageable());
+		System.out.println("##totalcnt?"+list.getTotalPages());
 		
 		return resultMap;
 	}
@@ -84,7 +94,7 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	
 	
 //	@Override
-//	public void save() {
+//	)public void save() {
 //		// TODO Auto-generated method stub
 ////		boardEntity params = boardEntity.builder()
 ////				.title("1번 게시글 제목")

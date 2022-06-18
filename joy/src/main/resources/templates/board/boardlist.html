@@ -26,8 +26,7 @@
 			<tr th:each="list,index : ${resultMap.list}" >
 			<!-- 반복 오브젝트 명 , 변수명   -->
 				<td>
-					[[${index.index}]]
-					[[${index.count}]]
+					[[${index.count}]]   
 					 <!--  jstl 의 c:forEach와 사용법이 같음   -->
 				</td>
 				<td>
@@ -36,14 +35,14 @@
 				<td>
 					<a th:href="@{./view(id=${list.id})}">
 						
-						<span th:text="${list.title}"></span>
-						[[${list.title}]]// 
+						[[${list.title}]]
 						<!-- 타임리프 사용 표현방식이다.  -->
 					</a>
 				</td>
 				
 				<td>
-					<span th:text="${list.writer}"></span>
+					<!-- <span th:text="${list.writer}"></span> -->
+					[[${list.writer}]]
 				</td>
 				<td>
 					<span th:text="${#temporals.format(list.createDate , 'yyyy-MM-dd HH:mm')}"></span>//
@@ -58,5 +57,15 @@
 		<div sec:authorize="isAuthenticated()">
 			<a th:href="@{./boardwrite}"> <span>작성</span> </a>
 		</div>	
+		<th:block th:each="num : ${#numbers.sequence(1,resultMap.totalPage)}">
+			<th:block th:if="${resultMap.nowcnt == num }">[[${num }]]</th:block>
+			<th:block th:unless="${resultMap.nowcnt == num }">
+				<a th:href="@{./boardlist(page=${num})}" >[[${num }]]</a>
+			</th:block>
+		</th:block>
+		
+		
+		
+		
 	</div>
 </html>

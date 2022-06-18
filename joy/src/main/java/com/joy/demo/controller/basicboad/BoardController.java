@@ -1,6 +1,8 @@
 package com.joy.demo.controller.basicboad;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,8 +17,6 @@ import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.entity.maria.boardEntity;
 import com.joy.demo.svc.basicboard.BasicBoardSvc;
 
-import groovyjarjarantlr4.v4.parse.ANTLRParser.throwsSpec_return;
-
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
@@ -25,8 +25,10 @@ public class BoardController {
 	
 	@GetMapping("boardlist")
 	public String boardsList(Model model, @RequestParam(required = false, defaultValue = "0") 
-	Integer page, @RequestParam(required = false, defaultValue = "5") Integer size ) throws Exception {
+	Integer page, @RequestParam(required = false, defaultValue = "10") Integer size ) throws Exception {
 		try {
+			
+		
 			
 			model.addAttribute("resultMap" , boardsvc.findAll(page, size));
 	
@@ -56,15 +58,22 @@ public class BoardController {
 	}
 	
 	@PostMapping("boardwrite")
-	public String boardswritePost(boardReqDto BoardTO, ModelMap model) {
+	public String boardswritePost(boardReqDto BoardTO, ModelMap model, Authentication authentication) {
 		try {
+		 User user = (User) authentication.getPrincipal();
+		 	if(user != null) {
+		 	BoardTO.setWriter(user.getUsername());
+		 // username 가져오고
+			// sessionid 가져오고 
+			// authorite 는 롤 가져
 			boardsvc.save(BoardTO);
+		 	}
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 			
-		return "board/boardinfo";
+		return "redirect:/board/boardlist";
 	}
 
 	@GetMapping("view")
