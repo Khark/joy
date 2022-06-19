@@ -1,8 +1,10 @@
+
 package com.joy.demo.controller.joy;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,9 +60,12 @@ public class JoyController {
 	public String listForm(@ModelAttribute("JoyTO") @Validated joyEntity joyto, Model model) {
 		System.out.println("#listForm GET>?");
 
-		List<joyEntity> joyvo = new ArrayList<joyEntity>();
-		joyvo = joysvc.selectJoyList(joyto);
-		model.addAttribute("list", joyvo);
+		//List<joyEntity> joyvo = new ArrayList<joyEntity>();
+		//joyvo = joysvc.selectJoyList(joyto);
+		//model.addAttribute("list", joyvo);
+		List<Document> list = joysvc.selectdJoyDocList(joyto);
+		model.addAttribute("list", list);
+		
 		return "joy/listForm";
 	}
 

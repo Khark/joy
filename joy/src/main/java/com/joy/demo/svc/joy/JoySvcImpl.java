@@ -13,12 +13,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.joy.demo.advice.RestException;
 import com.joy.demo.entity.mongo.joyEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+
 
 @Service
 public class JoySvcImpl implements JoySvc {
@@ -70,12 +77,22 @@ public class JoySvcImpl implements JoySvc {
 
 		query = new Query();
 		List<Document> doc2 = mongoTemplate.find(query, Document.class, "joy");
-		System.out.println("##" + doc);
-
-		for (int i = 0; i < doc2.size(); i++) {
-			System.out.println("##" + doc2.get(i));
-		}
-
+//		System.out.println("##" + doc);
+//
+//		for (int i = 0; i < doc2.size(); i++) {
+//			System.out.println("##" + doc2.get(i));
+//		}
+//		System.out.println("###????#?#??#End?");
 		return null;
+	}
+
+	@Override
+	public List<Document> selectdJoyDocList(joyEntity to) {
+		// TODO Auto-generated method stub
+		Pageable pageable = PageRequest.of(0, 20);
+
+		Query query = new Query().with(pageable);
+		List<Document> list = mongoTemplate.find(query, Document.class,"joy");
+		return list;
 	}
 }

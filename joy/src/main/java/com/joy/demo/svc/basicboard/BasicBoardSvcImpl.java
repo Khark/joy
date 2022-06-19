@@ -1,5 +1,7 @@
 package com.joy.demo.svc.basicboard;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,12 +14,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.joy.demo.dto.maria.board.boardReqDto;
 import com.joy.demo.dto.maria.board.boardResDto;
 import com.joy.demo.entity.maria.boardEntity;
+import com.joy.demo.entity.mongo.joyEntity;
 import com.joy.demo.repository.maria.board.BoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -33,14 +37,31 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	@PersistenceContext
 	EntityManager em;
 
+	
+	@Autowired
+	private MongoTemplate mongoTemplate;
+	
+	
 	@Override
 	@Transactional
 	public Long save(boardReqDto dto) {
 		// TODO Auto-generated method stub
 		Long boardcnt = null;
-		
-		for(int i = 0 ; i < 2000; i ++) {
-			boardcnt =+ boardRepository.save(dto.toEntity()).getId();
+		joyEntity joy = new joyEntity();
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		try {
+			for(int i = 0 ; i < 2000; i ++) {
+				joy = new joyEntity();
+				boardcnt = boardRepository.save(dto.toEntity()).getId();
+				joy.setName(dto.getTitle());
+				joy.setCreatedon(now.format(formatter));
+				mongoTemplate.insert(joy);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+
+			// TODO: handle exception
 		}
 		return boardcnt;
 	}
@@ -85,8 +106,6 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 		resultMap.put("totalPage", list.getTotalPages());
 		resultMap.put("nowcnt", page);
 		
-		System.out.println("##pageable?"+list.getPageable());
-		System.out.println("##totalcnt?"+list.getTotalPages());
 		
 		return resultMap;
 	}
