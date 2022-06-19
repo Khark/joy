@@ -8,7 +8,21 @@
 <form th:action="@{/joy/writeForm}" th:object="${JoyEntity}" method="post">
 
           
-
+	<table>
+		<tbody>
+			<tr th:each="list, index : ${resultMap.list}" >
+				<td>
+					[[${list._id}]]
+				</td>
+				<td>
+					[[${list.name}]]
+				</td>
+				<td>
+					[[${list.createdon}]]
+				</td>
+			</tr>		
+		</tbody>
+	</table>
 
 </form>
 </body>

@@ -1,5 +1,6 @@
 package com.joy.demo.svc.joy;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.bson.Document;
@@ -16,5 +17,5 @@ public interface JoySvc {
 
 	List<joyEntity> selectJoyList(joyEntity to);
 	
-	List<Document> selectdJoyDocList(joyEntity to);
+	HashMap<String , Object> selectdJoyDocList(joyEntity to);
 }

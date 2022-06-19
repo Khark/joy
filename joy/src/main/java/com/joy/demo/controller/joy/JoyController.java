@@ -2,6 +2,7 @@
 package com.joy.demo.controller.joy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bson.Document;
@@ -63,9 +64,9 @@ public class JoyController {
 		//List<joyEntity> joyvo = new ArrayList<joyEntity>();
 		//joyvo = joysvc.selectJoyList(joyto);
 		//model.addAttribute("list", joyvo);
-		List<Document> list = joysvc.selectdJoyDocList(joyto);
-		model.addAttribute("list", list);
-		
+		HashMap<String , Object> resultMap = joysvc.selectdJoyDocList(joyto);
+		model.addAttribute("resultMap", resultMap);
+
 		return "joy/listForm";
 	}
 

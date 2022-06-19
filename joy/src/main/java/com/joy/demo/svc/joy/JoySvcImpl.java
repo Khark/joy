@@ -3,6 +3,7 @@ package com.joy.demo.svc.joy;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,12 +88,18 @@ public class JoySvcImpl implements JoySvc {
 	}
 
 	@Override
-	public List<Document> selectdJoyDocList(joyEntity to) {
+	public HashMap<String, Object> selectdJoyDocList(joyEntity to) {
 		// TODO Auto-generated method stub
-		Pageable pageable = PageRequest.of(0, 20);
+		HashMap<String, Object > resultMap = new  HashMap<String, Object>();
+		Pageable pageable = PageRequest.of(0, 40).withSort(Sort.Direction.DESC, "createdon").withSort(Sort.Direction.DESC, "_id");
 
 		Query query = new Query().with(pageable);
 		List<Document> list = mongoTemplate.find(query, Document.class,"joy");
-		return list;
+		query = new  Query();
+		long count =  mongoTemplate.count(query, Document.class,"joy");
+		resultMap.put("list", list);
+		resultMap.put("count" , count);
+		
+		return resultMap;
 	}
 }
