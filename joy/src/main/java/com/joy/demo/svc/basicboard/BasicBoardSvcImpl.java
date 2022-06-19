@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -50,12 +51,26 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 		joyEntity joy = new joyEntity();
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		int leftLimit = 48;
+		int rightLimit = 122;
+		int targetStringLength = 225;
+		Random random = new Random();
+		String generateString = "";
 		try {
 			for(int i = 0 ; i < 2000; i ++) {
 				joy = new joyEntity();
 				boardcnt = boardRepository.save(dto.toEntity()).getId();
 				joy.setName(dto.getTitle());
 				joy.setCreatedon(now.format(formatter));
+				generateString = random.ints(leftLimit, rightLimit + 1).
+						filter(j -> (j <= 57 || j >= 65 )
+						&& (j <= 90 || j >= 97))
+						.limit(targetStringLength)
+						.collect(StringBuilder::new	, StringBuilder::appendCodePoint, StringBuilder::append)
+						.toString();
+				joy.setContent(generateString);
+			
+				
 				mongoTemplate.insert(joy);
 			}
 		}catch (Exception e) {

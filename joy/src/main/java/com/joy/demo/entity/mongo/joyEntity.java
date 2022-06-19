@@ -25,4 +25,5 @@ public class joyEntity {
 	
 	private String name;
 	private String memo;
+	private String content;
 }
