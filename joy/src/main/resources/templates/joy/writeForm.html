@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form th:action="@{/joy/writeForm}" th:object="${JoyEntity}" method="post">
+<form th:action="@{/joy/writeForm}" th:object="${JoyTO}" method="post">
 
             <input type="text" th:field="*{name}" placeholder="제목 입력 " required>
       <!--       <input type="text" th:field="*{name}" placeholder="책 제목을 입력하세요">

@@ -55,7 +55,10 @@ public class JoySvcImpl implements JoySvc {
 			LocalDateTime now = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			joyto.setCreatedon(now.format(formatter));
+			System.out.println("##########AAAA");
 			mongoTemplate.insert(joyto);
+			System.out.println("##########BBBB");
+
 		} catch (Exception e) {
 			result = "ProcessFail";
 			e.printStackTrace();

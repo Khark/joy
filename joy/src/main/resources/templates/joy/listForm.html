@@ -15,10 +15,9 @@
 					[[${list._id}]]
 				</td>
 				<td>
-					[[${list.name}]]
-				</td>
-				<td>
-					[[${list.content}]]
+					<a th:href="@{./view(_id=${list._id})}">
+						[[${list.name}]]
+					</a>
 				</td>
 				<td>
 					[[${list.createdon}]]
@@ -26,7 +25,7 @@
 			</tr>		
 		</tbody>
 	</table>
-
+	<a th:href="@{./writeForm}"> <span>작성</span> </a>
 </form>
 </body>
 </html>

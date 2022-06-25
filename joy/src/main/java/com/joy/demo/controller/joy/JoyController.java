@@ -41,6 +41,7 @@ public class JoyController {
 	
 	@PostMapping("writeForm")
 	public String writeFormPOST(@ModelAttribute("JoyTO") @Validated joyEntity joyto, Model model) {
+		System.out.println("###writeForm??");
 		String result="";
 
 		if(joysvc.insertEvent(joyto).equals("")) {
@@ -48,10 +49,10 @@ public class JoyController {
 		}else {
 			
 		}
-		return result;
+		return "redirect:./listForm";
 	}
 	
-	@GetMapping("viewForm")
+	@GetMapping("view")
 	public String viewForm( Model model , joyEntity joyvo  ) {
 		
 		return "joy/viewForm";
@@ -79,4 +80,5 @@ public class JoyController {
 		model.addAttribute("list", joyvo);
 		return "joy/listForm";
 	}
+	
 }
