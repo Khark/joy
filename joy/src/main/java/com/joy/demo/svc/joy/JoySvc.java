@@ -18,4 +18,6 @@ public interface JoySvc {
 	List<joyEntity> selectJoyList(joyEntity to);
 	
 	HashMap<String , Object> selectdJoyDocList(joyEntity to);
+	
+	joyEntity selectJoy(joyEntity to );
 }

@@ -55,9 +55,7 @@ public class JoySvcImpl implements JoySvc {
 			LocalDateTime now = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			joyto.setCreatedon(now.format(formatter));
-			System.out.println("##########AAAA");
 			mongoTemplate.insert(joyto);
-			System.out.println("##########BBBB");
 
 		} catch (Exception e) {
 			result = "ProcessFail";
@@ -76,7 +74,7 @@ public class JoySvcImpl implements JoySvc {
 		// Query query = new Query().with(new Sort(Direction.DESC, "no"));
 
 		System.out.println("안녕??");
-		Query query = new Query().addCriteria(Criteria.where("_id").is(new ObjectId("62459b039d47c06db438dfc5")));
+		Query query = new Query().addCriteria(Criteria.where("_id").is(new ObjectId("62b6c7699f54915f3bd71196")));
 		Document doc = mongoTemplate.findOne(query, Document.class, "joy"); // 데이터를 가져와서
 
 		query = new Query();
@@ -104,5 +102,17 @@ public class JoySvcImpl implements JoySvc {
 		resultMap.put("count" , count);
 		
 		return resultMap;
+	}
+
+	@Override
+	public joyEntity selectJoy(joyEntity to) {
+		// TODO Auto-generated method stub
+		
+		Query query = new Query().addCriteria(Criteria.where("_id").is(new ObjectId(to.get_id())) );
+		joyEntity joyvo = mongoTemplate.findOne(query, joyEntity.class,"joy");
+		System.out.println("##"+joyvo.getName());
+		System.out.println("##"+joyvo.getCreatedon());
+
+		return joyvo;
 	}
 }

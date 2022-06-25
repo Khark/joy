@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -49,12 +53,16 @@ public class JoyController {
 		}else {
 			
 		}
+		
+		
 		return "redirect:./listForm";
 	}
 	
 	@GetMapping("view")
-	public String viewForm( Model model , joyEntity joyvo  ) {
-		
+	public String viewForm( Model model , joyEntity joyvo, HttpServletRequest request  ) {
+
+		joyvo.set_id(request.getParameter("_id"));
+		model.addAttribute("joy", joysvc.selectJoy(joyvo));
 		return "joy/viewForm";
 	}
 	
