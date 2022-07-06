@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Table(name = "account")
 @Getter
 @Setter
-public class account {
+public class accountEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,15 +41,16 @@ public class account {
 	@Column(length =11 , nullable = false)
 	private Integer role;
 	
-	public account() {
-		
-	}
-
-	public account(Integer id , String name , String account, String password, Integer role) {
-		this.id = id;
+	@Column(length =2 , nullable = false )
+	private Integer group;
+	
+	// annotation builder 는 롬북으로 해야 한다.
+	@Builder
+	public accountEntity(String name , String account, String password, Integer role, Integer group) {
 		this.name = name;
 		this.account = account;
 		this.password = password;
 		this.role = role;
+		this.group = group;
 	}
 }

@@ -45,7 +45,6 @@ public class JoyController {
 	
 	@PostMapping("writeForm")
 	public String writeFormPOST(@ModelAttribute("JoyTO") @Validated joyEntity joyto, Model model) {
-		System.out.println("###writeForm??");
 		String result="";
 
 		if(joysvc.insertEvent(joyto).equals("")) {

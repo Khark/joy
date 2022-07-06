@@ -4,11 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.joy.demo.entity.maria.account;
+import com.joy.demo.entity.maria.accountEntity;
 
-public interface accountRepository extends JpaRepository<account, Integer > {
+public interface accountRepository extends JpaRepository<accountEntity, Integer > {
 
-	Optional<account> findByAccount(String account);
+	Optional<accountEntity> findByAccount(String account);
 	
 	
 }

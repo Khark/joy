@@ -1,17 +1,78 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="UTF-8">
-        <title>회원가입 페이지</title>
-    </head>
-    <body>
-        <h1>회원 가입</h1>
-        <hr>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<meta charset="UTF-8">
+<title>회원가입 페이지 </title>
+</head>
+<body>
 
-        <form th:action="@{/signup}" method="post">
-            <input type="text" name="account" placeholder="account 입력">
-            <input type="text" name="name" placeholder="user name 입력">
-            <input type="password" name="password" placeholder="password 입력">
-            <button type="submit">가입하기</button>
-        </form>
-    </body>
+	<th:block>
+		<h1>회원 가입</h1>
+		<hr>
+	
+		<form th:action="@{/signup}" method="post" id="frm">
+			<table>
+				<colgroup>
+					<col width="20%"/>
+					<col width="80%"/>
+				</colgroup>
+				<tr>
+					
+					<th>id</th>
+					<td><input type="text" name="account" placeholder="account 입력" required>
+						<input type="text" name="group" id="group"/>
+					</td>
+				</tr>
+				<tr>
+					<th>name</th>
+					<td><input type="text" name="name" placeholder="user name 입력" required> </td>
+				</tr>
+				<tr>
+					<th>password</th>
+					<td><input type="password" name="password" placeholder="password 입력" required></td>
+				</tr>
+			
+		
+			
+			</table>
+			<!-- <button type="submit">가입하기</button> -->
+			 <button type="submit" >가입하기 </button> 
+			<!-- <a href="#none" onclick ="fnSubmit();" ><span> 입력</span></a> -->
+		</form>
+	</th:block>
+	 <script th:inline="javascript">
+		
+	$(document).ready(function(){
+		    $("#frm").validate({
+		        rules: {
+		            id : {
+		                required: true,
+		                rangelength: [2, 10]
+		            },
+		            name: {
+		                required: true,
+		                rangelength: [2, 10]
+		            }
+		        },
+		        messages: {
+		            id: {
+		                required: "이름은 필수 입력입니다.",
+		                rangelength: "이름은 {0}자에서 {1}자까지 사용 가능합니다."
+		            },
+		            name: {
+		                required: "이메일은 필수 입력입니다.",
+		                email: "이메일 형식을 확인하세요."
+		            }
+		        },
+		        submitHandler: function(){
+		        	$("#group").val("1");
+		        	$("#frm").submit();
+		        }
+		    });
+		});
+	</script>
+</body>
 </html>

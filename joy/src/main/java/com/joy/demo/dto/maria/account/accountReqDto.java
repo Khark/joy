@@ -2,13 +2,16 @@ package com.joy.demo.dto.maria.account;
 
 import java.time.LocalDateTime;
 
-import com.joy.demo.entity.maria.account;
+import com.joy.demo.entity.maria.accountEntity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+
 public class accountReqDto {
 
 	private Integer id;
@@ -18,7 +21,15 @@ public class accountReqDto {
 	private LocalDateTime lastAccessDt;
 	private LocalDateTime regDt;
 	private Integer role;
-	public account toEntity() {
-		return new account(id, name, account, password, role);
+	private Integer group;
+	
+	public accountEntity toEntity() {
+		return accountEntity.builder()
+				.name(name)
+				.account(account)
+				.password(password)
+				.role(role)
+				.group(group)
+				.build();
 	}
 }

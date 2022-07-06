@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joy.demo.dto.maria.account.accountReqDto;
 import com.joy.demo.dto.maria.account.accountResDto;
-import com.joy.demo.entity.maria.account;
+import com.joy.demo.entity.maria.accountEntity;
 import com.joy.demo.repository.maria.account.accountRepository;
 
 
@@ -36,9 +36,9 @@ public class accountSvcImpl implements accountSvc {
 	@Override
 	public UserDetails loadUserByUsername(String Account) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<account> accountEntityWrapper = accRepository.findByAccount(Account);
+		Optional<accountEntity> accountEntityWrapper = accRepository.findByAccount(Account);
 		
-		account accountEntity = accountEntityWrapper.orElse(null);
+		accountEntity accountEntity = accountEntityWrapper.orElse(null);
 		
 		List<GrantedAuthority> authorites = new ArrayList<>();
 			
@@ -59,7 +59,7 @@ public class accountSvcImpl implements accountSvc {
 	@Transactional
 	@Override
 	public Integer save(accountReqDto accountto) {
-		account account = accountto.toEntity();
+		accountEntity account = accountto.toEntity();
 		account.setLastAccessDt(LocalDateTime.now());
 		account.setRegDt(LocalDateTime.now());
 
@@ -75,7 +75,7 @@ public class accountSvcImpl implements accountSvc {
 	public HashMap<String, Object> findAll(Integer page, Integer size) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		Page<account> list = accRepository.findAll(PageRequest.of(page, size));
+		Page<accountEntity> list = accRepository.findAll(PageRequest.of(page, size));
 		
 		resultMap.put("list", list.stream().map(accountResDto::new).collect(Collectors.toList()));
 		resultMap.put("paging", list.getPageable());

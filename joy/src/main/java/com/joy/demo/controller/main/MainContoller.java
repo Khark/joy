@@ -38,6 +38,7 @@ public class MainContoller {
 
 	@PostMapping("/signup")
 	public String signup(accountReqDto accountto) {
+		System.out.println("#####");
 		accountsvc.save(accountto);
 		return "redirect:/login";
 	}

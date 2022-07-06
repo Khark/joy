@@ -2,7 +2,7 @@ package com.joy.demo.dto.maria.account;
 
 import java.time.LocalDateTime;
 
-import com.joy.demo.entity.maria.account;
+import com.joy.demo.entity.maria.accountEntity;
 
 import lombok.Getter;
 
@@ -16,9 +16,9 @@ public class accountResDto {
 	private LocalDateTime lastAccessDt;
 	private LocalDateTime regDt;
 	private Integer role;
-	
+	private Integer group;
 
-	public accountResDto(account entity) {
+	public accountResDto(accountEntity entity) {
 		super();
 		this.id = entity.getId();
 		this.name = entity.getName();
@@ -27,13 +27,15 @@ public class accountResDto {
 		this.lastAccessDt = entity.getLastAccessDt();
 		this.regDt = entity.getRegDt();
 		this.role = entity.getRole();
+		this.group = entity.getGroup();
+		
 	}
 
 
 	@Override
 	public String toString() {
 		return "accountResDto [id=" + id + ", name=" + name + ", account=" + account + ", password=" + password
-				+ ", lastAccessDt=" + lastAccessDt + ", regDt=" + regDt + ", role=" + role + "]";
+				+ ", lastAccessDt=" + lastAccessDt + ", regDt=" + regDt + ", role=" + role + ", group=" + group + "]";
 	}
 	
 	
