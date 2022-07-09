@@ -21,7 +21,7 @@ public class accountReqDto {
 	private LocalDateTime lastAccessDt;
 	private LocalDateTime regDt;
 	private Integer role;
-	private Integer group;
+	private Integer groupid;
 	
 	public accountEntity toEntity() {
 		return accountEntity.builder()
@@ -29,7 +29,7 @@ public class accountReqDto {
 				.account(account)
 				.password(password)
 				.role(role)
-				.group(group)
+				.groupid(groupid)
 				.build();
 	}
 }

@@ -11,12 +11,14 @@ import javax.persistence.Table;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "account")
 @Getter
 @Setter
+@NoArgsConstructor
 public class accountEntity {
 
 	@Id
@@ -41,16 +43,16 @@ public class accountEntity {
 	@Column(length =11 , nullable = false)
 	private Integer role;
 	
-	@Column(length =2 , nullable = false )
-	private Integer group;
+	@Column(name="groupid" )
+	private Integer groupid;
 	
-	// annotation builder 는 롬북으로 해야 한다.
 	@Builder
-	public accountEntity(String name , String account, String password, Integer role, Integer group) {
+	public accountEntity(String name , String account, String password, Integer role, Integer groupid) {
+
 		this.name = name;
 		this.account = account;
 		this.password = password;
 		this.role = role;
-		this.group = group;
+		this.groupid = groupid;
 	}
 }

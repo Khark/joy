@@ -66,7 +66,7 @@ public class accountSvcImpl implements accountSvc {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		account.setRole(1); // 회원으로 가입을 하는 경우 
 		account.setPassword(passwordEncoder.encode(account.getPassword()));
-		
+		account.setGroupid(99); // 99 는 사업체 기
 		return accRepository.save(account).getId();
 	}
 

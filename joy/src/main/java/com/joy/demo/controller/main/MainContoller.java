@@ -39,6 +39,9 @@ public class MainContoller {
 	@PostMapping("/signup")
 	public String signup(accountReqDto accountto) {
 		System.out.println("#####");
+		//accountto.setGroup(1);
+		//System.out.println("#####accountgroup?"+accountto.getGroup());
+
 		accountsvc.save(accountto);
 		return "redirect:/login";
 	}
