@@ -3,7 +3,6 @@ package com.joy.demo.dto.maria.code;
 import java.time.LocalDateTime;
 
 import com.joy.demo.entity.maria.codeEntity;
-import com.joy.demo.entity.maria.codeEntity.codeEntityBuilder;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,22 +15,29 @@ import lombok.Setter;
 public class codeReqDto {
 
 	
-	private String codeid;
+	private Integer codeid;	
+	private String codecd;
 	private String codename;
 	private String upcodeid;
-	private LocalDateTime reg_dt = LocalDateTime.now();
 	private String reg_id;
+	private String delyn;
+	private String useyn;
+	private LocalDateTime reg_dt = LocalDateTime.now();
 	
 	
-	public codeEntityBuilder toEntity() {
+	public codeEntity toEntity() {
+		
 		return codeEntity.builder()
-				.codeid(codeid)
+				.codecd(codecd)
 				.codename(codename)
 				.upcodeid(upcodeid)
 				.reg_id(reg_id)
-				;
+				.delyn(delyn)
+				.useyn(useyn)
+				.build();
+		
+		//끝에 build() 를 넣어줘야 하는 것 잊지말것..!
 	}
-	
 	
 	
 	

@@ -13,9 +13,9 @@ public interface codeSvc {
 	
 	String save (codeReqDto codereqdto);
 	public List<codeResDto> findAll();
-	public codeResDto findById(String codeid);
+	public codeResDto findById(Integer codeid);
 	public int updateCode(codeReqDto dto);
-	public void deleteById(String codeid);
+	public void deleteById(Integer codeid);
 	HashMap<String , Object> findAll(Integer page, Integer size);
 	
 }

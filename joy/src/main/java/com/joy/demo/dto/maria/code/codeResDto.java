@@ -9,27 +9,34 @@ import lombok.Getter;
 @Getter
 public class codeResDto {
 
-	private String codeid;
+	
+	private Integer codeid;	
+	private String codecd;
 	private String codename;
 	private String upcodeid;
 	private LocalDateTime reg_dt;
 	private String reg_id;
+	private String delyn;
+	private String useyn;
 	
 
 	public codeResDto(codeEntity entity) {
-		super();
+		
 		this.codeid = entity.getCodeid();
+		this.codecd = entity.getCodecd();
 		this.codename = entity.getCodename();
 		this.upcodeid = entity.getUpcodeid();
 		this.reg_dt = entity.getReg_dt();
 		this.reg_id = entity.getReg_id();
+		this.delyn = entity.getDelyn();
+		this.useyn = entity.getUseyn();
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "codeResDto [codeid=" + codeid + ", codename=" + codename + ", upcodeid=" + upcodeid + ", reg_dt="
-				+ reg_dt + ", reg_id=" + reg_id + "]";
+		return "codeResDto [codeid ="+ codeid+"codecd=" + codecd + ", codename=" + codename + ", upcodeid=" + upcodeid + ", reg_dt="
+				+ reg_dt + ", reg_id=" + reg_id +  ", delyn=" + delyn + ", useyn=" + useyn + "]";
 	}
 
 	

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.joy.demo.entity.maria.codeEntity;
 
-public interface CodeRepository extends JpaRepository<codeEntity, String> {
+public interface CodeRepository extends JpaRepository<codeEntity, Integer> {
  
 }

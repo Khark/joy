@@ -39,10 +39,11 @@ public class boardReqDto {
 	
 	
 	public boardEntity toEntity() {
-		return boardEntity.builder()
+		return boardEntity.builder()	
 				.title(title)
 				.content(content)
 				.writer(writer)
 				.build();
+			
 	}
 }

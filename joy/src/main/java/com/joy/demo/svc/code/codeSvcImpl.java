@@ -37,7 +37,7 @@ public class codeSvcImpl implements codeSvc {
 	}
 
 	@Override
-	public codeResDto findById(String codeid) {
+	public codeResDto findById(Integer codeid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -49,7 +49,7 @@ public class codeSvcImpl implements codeSvc {
 	}
 
 	@Override
-	public void deleteById(String codeid) {
+	public void deleteById(Integer codeid) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -67,6 +67,8 @@ public class accountSvcImpl implements accountSvc {
 		account.setRole(1); // 회원으로 가입을 하는 경우 
 		account.setPassword(passwordEncoder.encode(account.getPassword()));
 		account.setGroupid(99); // 99 는 사업체 기
+		
+		//jpa 에서는 예약어를 사용한 컬럼이 있다면 정상적으로 수행되지 않는듯 함 
 		return accRepository.save(account).getId();
 	}
 
