@@ -23,7 +23,7 @@ public class codeReqDto {
 	private String delyn;
 	private String useyn;
 	private LocalDateTime reg_dt = LocalDateTime.now();
-	
+	private Integer codedepth;
 	
 	public codeEntity toEntity() {
 		
@@ -34,6 +34,7 @@ public class codeReqDto {
 				.reg_id(reg_id)
 				.delyn(delyn)
 				.useyn(useyn)
+				.codedepth(codedepth)
 				.build();
 		
 		//끝에 build() 를 넣어줘야 하는 것 잊지말것..!

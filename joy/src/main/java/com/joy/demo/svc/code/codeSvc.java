@@ -18,4 +18,7 @@ public interface codeSvc {
 	public void deleteById(Integer codeid);
 	HashMap<String , Object> findAll(Integer page, Integer size);
 	
+	
+	public List<codeResDto> selectCodeByDetpth(codeReqDto codereqdto);
+	
 }

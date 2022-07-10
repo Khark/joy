@@ -18,6 +18,7 @@ public class codeResDto {
 	private String reg_id;
 	private String delyn;
 	private String useyn;
+	private Integer codedepth;
 	
 
 	public codeResDto(codeEntity entity) {
@@ -30,13 +31,14 @@ public class codeResDto {
 		this.reg_id = entity.getReg_id();
 		this.delyn = entity.getDelyn();
 		this.useyn = entity.getUseyn();
+		this.codedepth = entity.getCodedepth();
 	}
 	
 	
 	@Override
 	public String toString() {
 		return "codeResDto [codeid ="+ codeid+"codecd=" + codecd + ", codename=" + codename + ", upcodeid=" + upcodeid + ", reg_dt="
-				+ reg_dt + ", reg_id=" + reg_id +  ", delyn=" + delyn + ", useyn=" + useyn + "]";
+				+ reg_dt + ", reg_id=" + reg_id +  ", delyn=" + delyn + ", useyn=" + useyn +  ", codedepth=" + codedepth +"]";
 	}
 
 	

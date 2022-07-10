@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" 
+	  xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>?????????
+<form id="frm" th:action="@{/code/rest/codeForm}" th:object="${codeReqDto}" method="post">
+	
+	
+	<!-- .codecd(codecd)
+				.codename(codename)
+				.upcodeid(upcodeid)
+				.reg_id(reg_id)
+				.delyn(delyn)
+				.useyn(useyn)
+				.codedepth(codedepth)
+				.build(); -->
+	<table>
+		<tr>
+			<th>
+				코드명 
+			</th>
+			<td>
+				<input type="text" th:filed="*{codename}"/>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				코드
+			</th>
+			<td>
+				<input type="text" th:filed="*{codecd}"/>
+			</td>
+		</tr>
+		<tr>
+			<th>사용여부 
+			</th>
+			<td>
+				<input type="radio" th:field="*{useyn}" value ="Y" checked="checked"/>사용 
+				<input type="radio" th:field="*{useyn}" value ="N"/>미사용 
+			</td>
+		</tr>
+	</table>
+
+</form>
+
+</body>
+</html>
