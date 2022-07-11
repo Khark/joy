@@ -3,22 +3,14 @@
 	  xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<form id="frm" th:action="@{/code/rest/codeForm}" th:object="${codeReqDto}" method="post">
-	
-	
-	<!-- .codecd(codecd)
-				.codename(codename)
-				.upcodeid(upcodeid)
-				.reg_id(reg_id)
-				.delyn(delyn)
-				.useyn(useyn)
-				.codedepth(codedepth)
-				.build(); -->
+
+<form id="frm"  th:object="${codeReqDto}" >
 	<table>
 		<tr>
 			<th>
@@ -45,22 +37,25 @@
 			</td>
 		</tr>
 	</table>
-    <button type="submit" onclick="fnSubmit();" >입력</button>
+   <!--  <button onclick="fnSubmit(); return false;" >입력</button> -->
+   <a href="#" onclick = "fnSubmit(); return false;" >입력</a>
 </form>
-<script th:inline="javascript">
+	<script th:inline="javascript">
 		
-		$(function() {
-			
-			
-			messages: {
-				title :{
-					required : "aaa"				
-				}
-			},
-			submitHandler: function(form) {
-				form.submit();
-			}
-		});
+		function fnSubmit(){
+			var formData = $("#frm").serialize();
+			$.ajax({
+				url : "/code/rest/codeForm",
+				
+				type : "POST",
+				 success : function(data){
+				 $('.result').text(data); },
+				 error:function(request, status, error){
+				 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				 }
+			});
+		}
+		
 	</script>
 </body>
 </html>

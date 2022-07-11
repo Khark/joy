@@ -7,18 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>?????????
+<body>
 <form id="frm" th:action="@{/code/rest/codeForm}" th:object="${codeReqDto}" method="post">
 	
-	
-	<!-- .codecd(codecd)
-				.codename(codename)
-				.upcodeid(upcodeid)
-				.reg_id(reg_id)
-				.delyn(delyn)
-				.useyn(useyn)
-				.codedepth(codedepth)
-				.build(); -->
 	<table>
 		<tr>
 			<th>
@@ -47,6 +38,8 @@
 	</table>
 
 </form>
+<script th:inline="javascript">
 
+</script>
 </body>
 </html>
