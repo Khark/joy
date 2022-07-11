@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+    	http
+        .csrf().disable();
     	// authorizeRequests 는 시큐리티 처리에 HttpServletRequest를 이용한다는 것을 의미함 
     	// antMatchers 는 특정한 경로를 지정
     	// permitAll 는 모든 사용자가 접근 가능함을 의미

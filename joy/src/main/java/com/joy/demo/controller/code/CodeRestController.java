@@ -4,17 +4,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.joy.demo.dto.maria.code.codeReqDto;
 
 @RestController
 @RequestMapping("code/rest/*")
 public class CodeRestController {
 
-	
-	//public String codeForm(@RequestBody codeReqDto codeto , ModelMap model, Authentication authenticatio)  {
 	@PostMapping("codeForm")
-	public String codeForm( ModelMap model)  {
+	public String codeForm(@RequestBody codeReqDto codeto )  {
+
 		String result = "ProcessSuccess";
 		System.out.println("####codeReestofrm");
 		return result;

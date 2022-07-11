@@ -46,7 +46,7 @@
 			var formData = $("#frm").serialize();
 			$.ajax({
 				url : "/code/rest/codeForm",
-				
+				data: formData,
 				type : "POST",
 				 success : function(data){
 				 $('.result').text(data); },
