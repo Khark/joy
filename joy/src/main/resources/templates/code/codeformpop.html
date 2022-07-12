@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" 
-	  xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<html xmlns:th="http://www.thymeleaf.org">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <head>
 <meta charset="UTF-8">
@@ -10,14 +7,14 @@
 </head>
 <body>
 
-<form id="frm"  th:object="${codeReqDto}" >
+<form id="codeForm" name="codeForm"  th:object="${codeForm}" >
 	<table>
 		<tr>
 			<th>
 				코드명 
 			</th>
 			<td>
-				<input type="text" th:filed="*{codename}"/>
+				<input type="text" th:field="*{codename}"/>
 			</td>
 		</tr>
 		<tr>
@@ -25,7 +22,7 @@
 				코드
 			</th>
 			<td>
-				<input type="text" th:filed="*{codecd}"/>
+				<input type="text" th:field="*{codecd}"/>
 			</td>
 		</tr>
 		<tr>
@@ -43,11 +40,12 @@
 	<script th:inline="javascript">
 		
 		function fnSubmit(){
-			var formData = $("#frm").serialize();
+			var formValues = $("form[name=codeForm]").serialize() ;
 			$.ajax({
 				url : "/code/rest/codeForm",
-				data: formData,
+				data: formValues,
 				type : "POST",
+				dataType: 'html',
 				 success : function(data){
 				 $('.result').text(data); },
 				 error:function(request, status, error){
@@ -55,7 +53,6 @@
 				 }
 			});
 		}
-		
 	</script>
 </body>
 </html>

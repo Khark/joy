@@ -29,9 +29,10 @@ public class CodeController {
 
 	
 	@GetMapping("codeForm")
-	public String codeForm(@ModelAttribute("codeReqDto") @Validated codeReqDto codeReqDto, ModelMap model  ) {
+	public String codeForm(@ModelAttribute("codeForm") @Validated codeReqDto codeReqDto, ModelMap model  ) {
 		
 		System.out.println("#####jo");
+		model.addAttribute("codeForm", codeReqDto);
 		return "code/codeformpop";
 	}
 	

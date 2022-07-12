@@ -15,20 +15,12 @@ import com.joy.demo.dto.maria.code.codeReqDto;
 public class CodeRestController {
 
 	@PostMapping("codeForm")
-	public String codeForm(@RequestBody codeReqDto codeto )  {
+	public String codeForm( @RequestBody codeReqDto codeto)  {
 
 		String result = "ProcessSuccess";
 		System.out.println("####codeReestofrm");
 		return result;
 	} 
-
 	
 
-	@GetMapping("codeForm")
-	//public String codeForm(@RequestBody codeReqDto codeto , ModelMap model, Authentication authenticatio)  {
-	public String codeFormget( ModelMap model)  {
-		String result = "ProcessSuccess";
-		System.out.println("####codeReestofrm");
-		return result;
-	} 
 }

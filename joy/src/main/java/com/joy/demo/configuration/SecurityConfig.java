@@ -41,15 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	// spring security 에서 ajax post를 사용하려면 밑의 http.csrf().disable(); 를 사용해야함 
     	http
         .csrf().disable();
+    	
     	// authorizeRequests 는 시큐리티 처리에 HttpServletRequest를 이용한다는 것을 의미함 
     	// antMatchers 는 특정한 경로를 지정
     	// permitAll 는 모든 사용자가 접근 가능함을 의미
     	// hasRole 는 시스템상에서 특정 권한을 지닌 사람만 접근이 가능함
     	// 
-    	
-    	
         http.authorizeRequests()
                // .antMatchers("/member/**").authenticated()
                 .antMatchers("/admin/**").authenticated()
