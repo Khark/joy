@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form id="codeForm" name="codeForm"  th:object="${codeForm}" >
+<form id="codeForm" name="codeForm"  th:object="${codeReqDto}" >
 	<table>
 		<tr>
 			<th>
@@ -37,15 +37,21 @@
    <!--  <button onclick="fnSubmit(); return false;" >입력</button> -->
    <a href="#" onclick = "fnSubmit(); return false;" >입력</a>
 </form>
-	<script th:inline="javascript">
+			<!-- var formValues = $("form[name=codeForm]").serialize() ;
+ -->
+	 <script th:inline="javascript">
 		
 		function fnSubmit(){
-			var formValues = $("form[name=codeForm]").serialize() ;
+			var form = $("#codeForm")[0];        
+      	  	var formData = new FormData(form);
+      	  	// form 이라는 하나의 오브젝트를 보내는 것이기에 하나를 지정해서 전송한다. 
+      	  	
 			$.ajax({
 				url : "/code/rest/codeForm",
-				data: formValues,
-				type : "POST",
-				dataType: 'html',
+				processData: false,
+	            contentType: false,
+	            type : 'POST', 
+	            data : formData, 
 				 success : function(data){
 				 $('.result').text(data); },
 				 error:function(request, status, error){
@@ -54,5 +60,10 @@
 			});
 		}
 	</script>
+	
+	
+	
+	
+	
 </body>
 </html>
