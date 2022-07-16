@@ -11,6 +11,6 @@ import com.joy.demo.entity.maria.codeEntity;
 public interface CodeRepository extends JpaRepository<codeEntity, Integer>, JpaSpecificationExecutor<codeEntity> {
  
 	
-	
+	List<codeResDto> findDepthcode(Integer codedepth );
 	
 }

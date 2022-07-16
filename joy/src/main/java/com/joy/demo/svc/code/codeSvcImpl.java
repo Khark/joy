@@ -1,5 +1,6 @@
 package com.joy.demo.svc.code;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,10 +32,18 @@ public class codeSvcImpl implements codeSvc {
 	@Override
 	public String save(codeReqDto codereqdto) {
 		// TODO Auto-generated method stub
+		codereqdto.setReg_dt(LocalDateTime.now());
 		
+		Integer result =  codeRepository.save(codereqdto.toEntity()).getCodeid() ; 
+		String result2= "";
+		System.out.println("##"+result);
+		if(result > 0 ) {
+			result2 = "ProcessSuccess";
+		}else {
+			result2 = "ProcessFail";
+		}
 		
-		codeRepository.save(codereqdto.toEntity()) ; 
-		return null;
+		return result2;
 	}
 
 	@Override

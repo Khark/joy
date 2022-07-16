@@ -22,8 +22,10 @@ public class CodeController {
 	
 	@GetMapping("codelist")
 	public String codeList(Model model) {
+		codeReqDto codereqdto = new codeReqDto();
+		codereqdto.setCodedepth(1);
+		model.addAttribute("group1" , codesvc.selectCodeByDetpth(codereqdto));
 		
-		System.out.println("###codelist?");
 		return "code/codelist";
 	}
 
