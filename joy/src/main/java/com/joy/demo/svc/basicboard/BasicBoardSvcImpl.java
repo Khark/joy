@@ -103,6 +103,11 @@ public class BasicBoardSvcImpl implements BasicBoardSvc {
 	@Override
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
+		
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		BoardRepository.aa(em, "1");
+	//	Page <boardReqDto>  list = boardRepository.findAll(PageRequest.of(page, size));
+		
 		boardRepository.deleteById(id);
 	}
 

@@ -1,5 +1,10 @@
 package com.joy.demo.repository.maria.board;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -42,18 +47,18 @@ public interface BoardRepository extends JpaRepository<boardEntity, Long>{
 	public int deleteBoard(@Param("deleteList") Long[] deleteList );
 	
 
-//
-//	public static void aa(EntityManager em, String param1) {
-//		String LIST_BOARD =  "SELECT title, writer, hits FROM boardtable"
-//				+" WHERE delyn ='N'";
-//		TypedQuery<boardEntity> query= em.createQuery(LIST_BOARD, boardEntity.class);
-//
-//		List<boardEntity> list =   query.getResultList();
-//		for(boardEntity board : list) {
-//			System.out.println("##"+board.getTitle()+"##"+board.getContent());
-//		}
-//		
-//	}
+
+	public static void aa(EntityManager em, String param1) {
+		String LIST_BOARD =  "SELECT title, writer, hits FROM boardtable"
+				+" WHERE delyn ='N'";
+		TypedQuery<boardEntity> query= em.createQuery(LIST_BOARD, boardEntity.class);
+
+		List<boardEntity> list =   query.getResultList();
+		for(boardEntity board : list) {
+			System.out.println("##"+board.getTitle()+"##"+board.getContent());
+		}
+		
+	}
 	
 	
 }
