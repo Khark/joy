@@ -78,11 +78,12 @@ public class codeSvcImpl implements codeSvc {
 	@Override
 	public List<codeResDto> selectCodeByDetpth(codeReqDto codereqdto) {
 		// TODO Auto-generated method stub
+		CodeRepository.selectCodeList(em , codereqdto);
 		
-		List<codeEntity> list = CodeRepository.selectCodeList(em , codereqdto);
-		for(int i = 0 ; i < list.size() ; i ++) {
-			System.out.println("###?"+list.get(i).getCodename());
-		}
+//		List<codeEntity> list = CodeRepository.selectCodeList(em , codereqdto);
+//		for(int i = 0 ; i < list.size() ; i ++) {
+//			System.out.println("###?"+list.get(i).getCodename());
+//		}
 		
 		return null;
 		

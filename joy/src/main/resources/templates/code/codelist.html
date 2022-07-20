@@ -9,7 +9,11 @@
 </head>
 <body>
 	<div sec:authorize="hasRole('ROLE_ADMIN')">
-	
+		<div>
+			<tr th:each="list,index : ${resultMap.list}" >
+			
+			</tr>
+		</div>
 	</div>
 	    <a href = "#none" onclick="fncOpenPopWrite(); return false;" target = "_blank">등록 </a>
 	<script th:inline="javascript">
