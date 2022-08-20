@@ -28,12 +28,12 @@ public interface CodeRepository extends JpaRepository<codeEntity, Integer>, JpaS
 		if(to.getUpcodeid() != null ) {
 			querystiring.append("AND UPCODEID = ?2");
 		}
-	
-		Query q1 = em.createQuery(querystiring.toString(), codeResDto.class).setParameter(1, to.getCodedepth());
-		List<codeResDto > q1result= q1.getResultList();
-		for(int j = 0 ; j <q1result.size() ; j ++) {
-			System.out.println("##wtf?"+q1result.get(j).getCodename());
-		}
+//	
+//		Query q1 = em.createQuery(querystiring.toString(), codeResDto.class).setParameter(1, to.getCodedepth());
+//		List<codeResDto > q1result= q1.getResultList();
+//		for(int j = 0 ; j <q1result.size() ; j ++) {
+//			System.out.println("##wtf?"+q1result.get(j).getCodename());
+//		}
 //		
 //		TypedQuery<codeEntity> queryresult = 
 //				em.createQuery(querystiring.toString(), codeEntity.class )
