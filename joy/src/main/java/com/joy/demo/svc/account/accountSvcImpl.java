@@ -41,7 +41,7 @@ public class accountSvcImpl implements accountSvc {
 		accountEntity accountEntity = accountEntityWrapper.orElse(null);
 		
 		List<GrantedAuthority> authorites = new ArrayList<>();
-			
+		
 		switch (accountEntity.getRole()) {
 		case 1 :
 			authorites.add(new SimpleGrantedAuthority("ROLE_MEMBER")); // 1인 그룹은 회원 
